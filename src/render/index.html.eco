@@ -1,0 +1,33 @@
+---
+layout: "default"
+---
+
+<main>
+  <header>
+    <h1> <%= @site.title %> </h1>
+    <h2> <%= @site.description %> </h2>
+  </header>
+  <img src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=180&amp;d=identicon" class="circular ui image">
+  <p>
+    <i class="big red heart icon"></i>
+    on a mission to demystify the magic of technology and put the people in control.
+  </p>
+  <nav>
+    <ul class="ui borderless icon menu">
+      <li class="item"><%- @partial("email.html.eco") %></li>
+      <li class="item">
+        <a href="https://github.com/ahdinosaur"><i class="big circular github icon"></i></a>
+      </li>
+      <li class="item">
+        <a href="https://twitter.com/ahdinosaur"><i class="big circular twitter icon"></i></a>
+      </li>
+      <li class="item">
+        <a href="./resume.html"><i class="big circular book icon"></i></a>
+      </li>
+    </ul>
+  </nav>
+  <p>
+    if i make you <span class="ui label">happy <i class="smile icon"></i></span>, please feed me!
+    <script data-gittip-username="ahdinosaur" src="//gttp.co/v1.js"></script>
+  </p>
+</main>

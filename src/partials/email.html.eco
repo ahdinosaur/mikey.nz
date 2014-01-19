@@ -1,0 +1,3 @@
+<a href="mailto:<%- @helpers.obfuscate(@site.email) %>" class="obfuscated">
+  <i class="big circular mail icon"></i>
+</a>

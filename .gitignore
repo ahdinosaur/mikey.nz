@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+
+tmp
+temp
+TODO.md
+.DS_Store
+
+*.sublime-*
+*.swp
+
+/out
+.docpad.db
+
+/src/scripts/bundle.js
