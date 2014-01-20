@@ -7,6 +7,7 @@
 @import '../../../node_modules/semantic/src/elements/image.less';
 @import '../../../node_modules/semantic/src/elements/segment.less';
 @import '../../../node_modules/semantic/src/collections/menu.less';
+@import '../../../node_modules/semantic/src/modules/popup.less';
 
 @import './flex.less';
 
@@ -86,4 +87,15 @@ body > main > nav {
   a {
     text-decoration: none;
   }
+}
+
+.only.screen.reader {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
 }

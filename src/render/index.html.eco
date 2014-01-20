@@ -7,7 +7,7 @@ layout: "default"
     <h1> <%= @site.title %> </h1>
     <h2> <%= @site.description %> </h2>
   </header>
-  <img src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=180&amp;d=identicon" class="circular ui image">
+  <img src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
   <p>
     <i class="big red heart icon"></i>
     on a mission to demystify the magic of technology and put the people in control.
@@ -16,13 +16,22 @@ layout: "default"
     <ul class="ui borderless icon menu">
       <li class="item"><%- @partial("email.html.eco") %></li>
       <li class="item">
-        <a href="https://github.com/ahdinosaur"><i class="big circular github icon"></i></a>
+        <a href="https://github.com/ahdinosaur">
+          <i class="big circular github icon" title="GitHub"></i>
+          <span class="only screen reader">GitHub</span>
+        </a>
       </li>
       <li class="item">
-        <a href="https://twitter.com/ahdinosaur"><i class="big circular twitter icon"></i></a>
+        <a href="https://twitter.com/ahdinosaur">
+          <i class="big circular twitter icon" title="Twitter"></i>
+          <span class="only screen reader">Twitter</span>
+        </a>
       </li>
       <li class="item">
-        <a href="./resume.html"><i class="big circular book icon"></i></a>
+        <a href="./resume.html">
+          <i class="big circular book icon" title="resume"></i>
+          <span class="only screen reader">resume</span>
+        </a>
       </li>
     </ul>
   </nav>
