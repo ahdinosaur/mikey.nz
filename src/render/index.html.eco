@@ -12,6 +12,10 @@ layout: "default"
     <i class="big red heart icon"></i>
     on a mission to demystify the magic of technology and put the people in control.
   </p>
+  <p>
+    currently working on <a href="http://holonomy.is">holonomy</a>.
+    <i class="big green settings icon"></i>
+  </p>
   <nav>
     <ul class="ui borderless icon menu">
       <li class="item"><%- @partial("email.html.eco") %></li>
