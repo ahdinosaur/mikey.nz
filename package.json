@@ -15,7 +15,8 @@
   "main": "node_modules/docpad/bin/docpad-server",
   "scripts": {
     "start": "node .",
-    "deploy": "git remote add target git@github.com:ahdinosaur/ahdinosaur.github.io.git; docpad deploy-ghpages --env static"
+    "deploy": "git remote add target git@github.com:ahdinosaur/ahdinosaur.github.io.git; docpad deploy-ghpages --env static",
+    "develop": "docpad run"
   },
   "dependencies": {
     "docpad": "~6.59.6",
