@@ -2,17 +2,23 @@
 layout: "default"
 ---
 
-<main>
+<main vocab="http://xmlns.com/foaf/0.1/" about="#i" typeof="foaf:Person">
   <header>
-    <h1> <%= @site.title %> </h1>
-    <h2> <%= @site.description %> </h2>
+    <h1>
+      <span property="name">dinosaur</span>
+      is
+    </h1>
+    <h2>
+      a
+      <span property="title">hippie hacker</span>
+    </h2>
   </header>
-  <img src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
-  <p>
+  <img property="img" alt="dinosaur's avatar" src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
+  <p property="project">
     <i class="big red heart icon"></i>
     on a mission to demystify the magic of technology and put the people in control.
   </p>
-  <p>
+  <p property="project">
     currently working on <a href="http://holonomy.is">holonomy</a>.
     <i class="big green settings icon"></i>
   </p>
@@ -20,27 +26,27 @@ layout: "default"
     <ul class="ui borderless icon menu">
       <li class="item"><%- @partial("email.html.eco") %></li>
       <li class="item">
-        <a href="https://github.com/ahdinosaur">
+        <a property="account" href="https://github.com/ahdinosaur">
           <i class="big circular github icon" title="GitHub"></i>
           <span class="only screen reader">GitHub</span>
         </a>
       </li>
       <li class="item">
-        <a href="https://twitter.com/ahdinosaur">
+        <a property="account" href="https://twitter.com/ahdinosaur">
           <i class="big circular twitter icon" title="Twitter"></i>
           <span class="only screen reader">Twitter</span>
         </a>
       </li>
       <li class="item">
-        <a href="./resume.html">
+        <a property="resume" href="./resume.html">
           <i class="big circular book icon" title="resume"></i>
           <span class="only screen reader">resume</span>
         </a>
       </li>
     </ul>
   </nav>
-  <p>
-    if i make you <span class="ui teal label">happy <i class="smile icon"></i></span>, please feed me!
+  <p property="tipjar">
+    if i make you <span class="ui teal label">happy <i class="smile icon"></i></span>, please feed me on gittip!
     <script data-gittip-username="ahdinosaur" src="//gttp.co/v1.js"></script>
   </p>
 </main>
