@@ -1,3 +1,5 @@
+var $ = require('jquery');
+
 module.exports = function () {
   /*
   event handler to deobfuscate obfuscated elements

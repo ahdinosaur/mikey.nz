@@ -1,4 +1,8 @@
-var $ = jQuery = require('jquery/dist/jquery')(window);
+---
+browserify: true
+---
+
+var $ = jQuery = require('jquery');
 require('./vendor/jquery.easing');
 
 require('semantic/src/modules/popup');
