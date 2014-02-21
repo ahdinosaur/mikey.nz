@@ -19,7 +19,7 @@
     "develop": "docpad run"
   },
   "dependencies": {
-    "docpad": "~6.63.3",
+    "docpad": "~6.63.7",
     "semantic": "git+https://github.com/Semantic-Org/Semantic-UI#0.12.5",
     "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome#v4.0.3",
     "jquery": "2.1.0",
