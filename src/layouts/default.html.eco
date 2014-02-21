@@ -13,6 +13,6 @@
     <%- @partial("fork.html") %>
 
     <%- @content %>
-    <%- @getBlock("scripts").add("/scripts/index.js").toHTML() %>
+    <%- @getBlock("scripts").add("/scripts/bundle.js").toHTML() %>
   </body>
 </html>

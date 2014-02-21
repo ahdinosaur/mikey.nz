@@ -1,7 +1,3 @@
----
-browserify: true
----
-
 var $ = jQuery = require('jquery');
 require('./vendor/jquery.easing');
 
