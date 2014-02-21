@@ -25,7 +25,8 @@
     "jquery": "2.1.0",
     "munge": "~0.1.4",
     "randomstring": "~1.0.2",
-    "uglifyify": "~1.2.2"
+    "uglifyify": "~1.2.2",
+    "docpad-plugin-livereload": "~2.6.0"
   },
   "devDependencies": {
     "docpad-plugin-partials": "~2.8.1",
