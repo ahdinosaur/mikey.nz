@@ -14,12 +14,12 @@ layout: "default"
     </h2>
   </header>
   <img property="img" alt="dinosaur's avatar" src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
-  <p property="project">
+  <p>
     <i class="big red heart icon"></i>
-    on a mission to demystify the magic of technology and put the people in control.
+    <span property="project">on a mission to demystify the magic of technology and put the people in control.</span>
   </p>
-  <p property="project">
-    currently working on <a href="http://holonomy.is">holonomy</a>.
+  <p>
+    <span property="project">currently working on <a href="http://holonomy.is">holonomy</a>.</span>
     <i class="big green settings icon"></i>
   </p>
   <nav>
@@ -45,8 +45,9 @@ layout: "default"
       </li>
     </ul>
   </nav>
-  <p property="tipjar">
+  <p>
     if i make you <span class="ui teal label">happy <i class="smile icon"></i></span>, please feed me on gittip!
     <script data-gittip-username="ahdinosaur" src="//gttp.co/v1.js"></script>
+    <a property="tipjar" href="https://gittip.com/ahdinosaur" style="display: none;">https://gittip.com/ahdinosaur</a>
   </p>
 </main>
