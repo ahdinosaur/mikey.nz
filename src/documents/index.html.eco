@@ -38,9 +38,9 @@ layout: "default"
         </a>
       </li>
       <li class="item">
-        <a property="resume" href="./resume.html">
-          <i class="big circular book icon" title="resume"></i>
-          <span class="only screen reader">resume</span>
+        <a property="blog" href="http://blog.dinosaur.is/">
+          <i class="big circular book icon" title="blog"></i>
+          <span class="only screen reader">blog</span>
         </a>
       </li>
     </ul>
