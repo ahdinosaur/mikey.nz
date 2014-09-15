@@ -26,6 +26,12 @@ layout: "default"
     <ul class="ui borderless icon menu">
       <li class="item"><%- @partial("email.html.eco") %></li>
       <li class="item">
+        <a property="blog" href="http://blog.dinosaur.is/">
+          <i class="big circular book icon" title="blog"></i>
+          <span class="only screen reader">blog</span>
+        </a>
+      </li>
+      <li class="item">
         <a property="account" href="https://github.com/ahdinosaur">
           <i class="big circular github icon" title="GitHub"></i>
           <span class="only screen reader">GitHub</span>
@@ -35,12 +41,6 @@ layout: "default"
         <a property="account" href="https://twitter.com/ahdinosaur">
           <i class="big circular twitter icon" title="Twitter"></i>
           <span class="only screen reader">Twitter</span>
-        </a>
-      </li>
-      <li class="item">
-        <a property="blog" href="http://blog.dinosaur.is/">
-          <i class="big circular book icon" title="blog"></i>
-          <span class="only screen reader">blog</span>
         </a>
       </li>
       <li class="item">
