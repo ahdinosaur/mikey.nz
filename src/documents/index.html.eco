@@ -51,9 +51,12 @@ layout: "default"
       </li>
     </ul>
   </nav>
+  <hr />
   <p>
-    if i make you <span class="ui teal label">happy <i class="smile icon"></i></span>, please feed me on gittip!
-    <script data-gittip-username="ahdinosaur" src="//gttp.co/v1.js"></script>
-    <a property="tipjar" href="https://gittip.com/ahdinosaur" style="display: none;">https://gittip.com/ahdinosaur</a>
+    if i make you <span class="ui teal label">happy <i class="smile icon"></i></span>, please feed me on <a property="tipjar" href="https://gratipay.com/ahdinosaur">Gratipay</a>!
+    <br />
+    <br />
+    <script data-gratipay-username="ahdinosaur" src="//grtp.co/v1.js" async></script>
+    <script data-gratipay-username="ahdinosaur" src="//grtp.co/v1.js" data-gratipay-widget="giving" async></script>
   </p>
 </main>
