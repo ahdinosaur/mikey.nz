@@ -43,6 +43,12 @@ layout: "default"
           <span class="only screen reader">blog</span>
         </a>
       </li>
+      <li class="item">
+        <a property="key" href="https://keybase.io/dinosaur">
+          <i class="big circular key icon" title="Keybase"></i>
+          <span class="only screen reader">Keybase</span>
+        </a>
+      </li>
     </ul>
   </nav>
   <p>
