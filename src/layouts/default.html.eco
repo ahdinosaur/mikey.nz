@@ -14,5 +14,6 @@
 
     <%- @content %>
     <%- @getBlock("scripts").add("/scripts/bundle.js").toHTML() %>
+    <%- @partial("analytics.html") %>
   </body>
 </html>
