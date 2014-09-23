@@ -19,21 +19,21 @@
     "develop": "docpad run"
   },
   "dependencies": {
-    "docpad": "~6.63.7",
-    "semantic": "git+https://github.com/Semantic-Org/Semantic-UI#0.12.5",
-    "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome#v4.0.3",
-    "jquery": "2.1.0",
-    "munge": "~0.1.4",
-    "randomstring": "~1.0.2",
-    "uglifyify": "~1.2.2",
-    "docpad-plugin-livereload": "~2.6.0"
-  },
-  "devDependencies": {
-    "docpad-plugin-partials": "~2.8.1",
-    "docpad-plugin-less": "~2.4.0",
+    "docpad": "^6.69.1",
     "docpad-plugin-browserifybundles": "~2.0.0",
     "docpad-plugin-eco": "~2.0.3",
-    "docpad-plugin-raw": "~2.2.3",
+    "docpad-plugin-less": "~2.4.0",
+    "docpad-plugin-livereload": "~2.6.0",
+    "docpad-plugin-partials": "^2.8.1",
+    "docpad-plugin-raw": "^2.2.3",
+    "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome#v4.0.3",
+    "jquery": "^2.1.1",
+    "munge": "~0.1.4",
+    "randomstring": "~1.0.2",
+    "semantic": "git+https://github.com/Semantic-Org/Semantic-UI#0.12.5",
+    "uglifyify": "^1.2.3"
+  },
+  "devDependencies": {
     "docpad-plugin-ghpages": "~2.4.2"
   }
 }
