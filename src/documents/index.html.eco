@@ -26,7 +26,7 @@ layout: "default"
     <ul class="ui borderless icon menu">
       <li class="item"><%- @partial("email.html.eco") %></li>
       <li class="item">
-        <a property="blog" href="http://blog.dinosaur.is/">
+        <a property="blog" href="https://blog.dinosaur.is/">
           <i class="big circular book icon" title="blog"></i>
           <span class="only screen reader">blog</span>
         </a>
