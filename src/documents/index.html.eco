@@ -13,7 +13,7 @@ layout: "default"
       <span property="title">hippie hacker</span>
     </h2>
   </header>
-  <img property="img" alt="dinosaur's avatar" src="http://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
+  <img property="img" alt="dinosaur's avatar" src="https://gravatar.com/avatar/22ee24b84d0a2a9446fc9c0fe0652c46?s=256&amp;d=identicon" class="circular ui image">
   <p>
     <i class="big red heart icon"></i>
     <span property="project">on a mission to demystify the magic of technology and put the people in control.</span>
