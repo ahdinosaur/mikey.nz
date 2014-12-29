@@ -6,7 +6,7 @@ module.exports = {
     site: {
       title: "dinosaur is",
       description: "a hippie hacker",
-      email: "dinosaur@riseup.net",
+      email: "michael@enspiral.com",
     },
     helpers: {
       obfuscate: function (s) {
