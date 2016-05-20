@@ -6,6 +6,11 @@
   box-sizing: inherit;
 }
 
+a {
+  color: unset;
+  text-decoration: none;
+}
+
 @media all and (min-width: 800px) {
   .main-image {
     background-image: url('./images/mikey-large.jpg');
@@ -136,7 +141,6 @@ nav > ul > a {
   align-items: center;
   border-right: 2px solid black;
   border-left: 2px solid black;
-  text-decoration: none;
 }
 
 nav > ul > a > li {
