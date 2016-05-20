@@ -1,39 +1,43 @@
 {
   "name": "dinosaur.is",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "description": "dinosaur.is website",
+  "main": "index.js",
+  "scripts": {
+    "start": "budo src:bundle.js -d src --live -- -d",
+    "bundle": "browserify src -g envify -g uglifyify",
+    "build": "npm run --silent bundle -- -o src/bundle.js",
+    "disc": "npm run --silent bundle -- --full-paths | discify --open",
+    "push": "gh-pages -d src",
+    "deploy": "npm-run-all -s build push"
+  },
+  "browserify": {
+    "transform": []
+  },
   "repository": {
     "type": "git",
-    "url": "git://github.com/ahdinosaur/dinosaur.is.git"
+    "url": "git+https://github.com/ahdinosaur/dinosaur.is.git"
   },
-  "author": "ahdinosaur",
-  "license": "AGPLv3",
+  "keywords": [],
+  "author": "Mikey <michael.williams@enspiral.com> (http://dinosaur.is)",
+  "license": "Apache-2.0",
   "bugs": {
     "url": "https://github.com/ahdinosaur/dinosaur.is/issues"
   },
-  "homepage": "http://dinosaur.is",
-  "main": "node_modules/docpad/bin/docpad-server",
-  "scripts": {
-    "start": "node .",
-    "deploy": "git remote add target git@github.com:ahdinosaur/ahdinosaur.github.io.git; docpad deploy-ghpages --env static",
-    "develop": "docpad run"
+  "homepage": "https://github.com/ahdinosaur/dinosaur.is#readme",
+  "devDependencies": {
+    "browserify": "^13.0.0",
+    "budo": "^8.1.0",
+    "disc": "^1.3.2",
+    "envify": "^3.4.0",
+    "gh-pages": "^0.11.0",
+    "npm-run-all": "^1.6.0",
+    "uglifyify": "^3.0.1",
+    "watchify": "^3.7.0"
   },
   "dependencies": {
-    "docpad": "^6.69.1",
-    "docpad-plugin-browserifybundles": "~2.0.0",
-    "docpad-plugin-eco": "~2.0.3",
-    "docpad-plugin-less": "~2.4.0",
-    "docpad-plugin-livereload": "~2.6.0",
-    "docpad-plugin-partials": "^2.8.1",
-    "docpad-plugin-raw": "^2.2.3",
-    "font-awesome": "git+https://github.com/FortAwesome/Font-Awesome#v4.0.3",
-    "jquery": "^2.1.1",
-    "munge": "~0.1.4",
-    "randomstring": "~1.0.2",
-    "semantic": "git+https://github.com/Semantic-Org/Semantic-UI#0.12.5",
-    "uglifyify": "^1.2.3"
-  },
-  "devDependencies": {
-    "docpad-plugin-ghpages": "~2.4.2"
+    "jquery": "^2.2.3",
+    "munge": "^0.1.7",
+    "randomstring": "^1.1.5"
   }
 }

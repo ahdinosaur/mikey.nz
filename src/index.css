@@ -1,0 +1,132 @@
+@media all and (min-width: 800px) {
+  .main-image {
+    background-image: url('./images/mikey-large.jpg');
+  }
+
+  header {
+    flex-direction: row;
+  }
+
+  header h1 {
+    font-size: 6rem;
+  }
+
+  header h2 {
+    padding: 0.5rem;
+    font-size: 2rem;
+  }
+
+  header p {
+    padding-top: 1.5rem;
+    font-size: 1.8rem;
+  }
+
+  nav .icon {
+    display: none !important;
+  }
+}
+
+@media all and (max-width: 800px) {
+  .main-image {
+    background-image: url('./images/mikey-small.jpg');
+  }
+
+  header {
+    flex-direction: column;
+  }
+
+  header h1 {
+    font-size: 3.5rem;
+  }
+
+  header p {
+    padding-top: 0.5rem;
+    font-size: 1.5rem;
+  }
+
+  header h2, nav .text {
+    /*
+     * Hide only visually, but have it available for screen readers:
+     * http://snook.ca/archives/html_and_css/hiding-content-for-accessibility
+     */
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+}
+
+html, body, main {
+  font-family: 'Lora', serif;
+  font-weight: normal;
+  font-style: normal; 
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  background-color: grey;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  padding: 1.2rem;
+  background-color: white;
+  border-bottom: 5px solid black;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.main-image {
+  flex-grow: 1;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+nav {
+  border-top: 5px solid black;
+  background-color: white;
+  height: 5rem;
+}
+
+nav > ul {
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+nav > ul > a {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-right: 2px solid black;
+  border-left: 2px solid black;
+  text-decoration: none;
+}
+
+nav > ul > a > li {
+  color: black;
+  font-size: 3.5rem;
+  text-align: center;
+}
+
+nav .icon {
+  height: 90%;
+}

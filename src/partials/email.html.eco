@@ -1,4 +1,0 @@
-<a property="mbox" href="mailto:<%- @helpers.obfuscate(@site.email) %>" class="obfuscated">
-  <i class="big circular mail icon" title="email" class="obfuscated"></i>
-  <span class="only screen reader obfuscated">email</span>
-</a>
