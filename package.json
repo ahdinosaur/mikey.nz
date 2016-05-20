@@ -8,7 +8,7 @@
     "bundle": "browserify src -g envify -g uglifyify",
     "build": "npm run --silent bundle -- -o src/bundle.js",
     "disc": "npm run --silent bundle -- --full-paths | discify --open",
-    "push": "gh-pages -d src --repo git@github.com:ahdinosaur/ahdinosaur.github.io -b master -t -a",
+    "push": "gh-pages -d src --repo git@github.com:ahdinosaur/ahdinosaur.github.io -b master -t",
     "deploy": "npm-run-all -s build push"
   },
   "browserify": {
