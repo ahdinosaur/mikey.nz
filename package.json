@@ -36,6 +36,7 @@
     "watchify": "^3.7.0"
   },
   "dependencies": {
+    "contain-cover": "^0.2.1",
     "jquery": "^2.2.3",
     "munge": "^0.1.7",
     "randomstring": "^1.1.5"

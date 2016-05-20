@@ -1,3 +1,11 @@
+/* http://www.paulirish.com/2012/box-sizing-border-box-ftw/ */
+* {
+  border-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
 @media all and (min-width: 800px) {
   .main-image {
     background-image: url('./images/mikey-large.jpg');
@@ -5,19 +13,20 @@
 
   header {
     flex-direction: row;
+    align-items: baseline;
   }
 
   header h1 {
-    font-size: 6rem;
+    font-size: 5.5rem;
   }
 
   header h2 {
-    padding: 0.5rem;
+    padding-left: 0.5rem;
     font-size: 2rem;
   }
 
   header p {
-    padding-top: 1.5rem;
+    flex-grow: 1;
     font-size: 1.8rem;
   }
 
@@ -33,6 +42,7 @@
 
   header {
     flex-direction: column;
+    align-items: center;
   }
 
   header h1 {
@@ -83,15 +93,23 @@ header {
   text-align: center;
   display: flex;
   justify-content: space-around;
-  align-items: center;
 }
 
 .main-image {
   flex-grow: 1;
+  display: flex;
+  justify-content: center;
   background-repeat: no-repeat;
   background-size: contain;
   background-position: center;
   background-attachment: fixed;
+}
+
+.main-image img {
+}
+
+.main-image canvas {
+  display: fixed
 }
 
 nav {
@@ -130,3 +148,32 @@ nav > ul > a > li {
 nav .icon {
   height: 90%;
 }
+
+/*
+@keyframes colorRotate {
+  from {
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 255, 0, 1) 15%,
+      rgba(0, 255, 0, 1) 30%,
+      rgba(0, 255, 255, 1) 50%,
+      rgba(0, 0, 255, 1) 65%,
+      rgba(255, 0, 255, 1) 80%,
+      rgba(255, 0, 0, 1) 100%
+    );
+  }
+  100% {
+    background-image: linear-gradient(
+      to right,
+      rgba(255, 0, 0, 1) 100%,
+      rgba(255, 0, 0, 1) 0%,
+      rgba(255, 255, 0, 1) 15%,
+      rgba(0, 255, 0, 1) 30%,
+      rgba(0, 255, 255, 1) 50%,
+      rgba(0, 0, 255, 1) 65%,
+      rgba(255, 0, 255, 1) 80%
+    );
+  }
+}
+*/
