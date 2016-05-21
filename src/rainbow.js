@@ -49,7 +49,6 @@ function createRainbow () {
         canvasDrain
       )
     } else {
-      image.src = '#'
       container.style.backgroundImage = 'url(./images/mikey-small.jpg)'
     }
   }
