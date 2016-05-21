@@ -4,7 +4,6 @@ var deobfuscate = require('./deobfuscate')
 
 deobfuscate()
 
-/*
 var container = document.querySelector('.main-image')
 var image = new Image()
 image.src = './images/mikey-large.jpg'
@@ -21,17 +20,18 @@ window.addEventListener('resize', function (ev) {
 scale()
 
 function scale () {
+  var bounds = container.getBoundingClientRect()
   var dimensions = contain(
-    container.clientWidth,
-    container.clientHeight,
+    bounds.width,
+    bounds.height,
     image.width,
     image.height
   )
-  console.log('dimensions', dimensions)
-  //container.width = dimensions.width
-  //container.height = dimensions.height,
+  console.log('dimensions', container.getBoundingClientRect(), dimensions)
   image.width = dimensions.width
   image.height = dimensions.height
+  image.style.left = (bounds.x + dimensions.x) + 'px'
+  image.style.top = (bounds.y + dimensions.y) + 'px'
 }
 
 var canvas = document.createElement('canvas')
@@ -45,4 +45,3 @@ context.fillStyle = 'red'
 function contain (containerWidth, containerHeight, width, height) {
   
 }
-*/
