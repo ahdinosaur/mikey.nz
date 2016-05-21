@@ -6,6 +6,15 @@
   box-sizing: inherit;
 }
 
+@font-face {
+  font-family: 'Lora';
+  src: url('./fonts/Lora-Regular.eot');
+  src: url('./fonts/Lora-Regular.eot?#iefix') format('embedded-opentype'),
+       url('./fonts/Lora-Regular.woff') format('woff'),
+       url('./fonts/Lora-Regular.ttf') format('truetype'),
+       url('./fonts/Lora-Regular.svg#Lora') format('svg');
+}
+
 a {
   color: unset;
   text-decoration: none;
