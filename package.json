@@ -4,13 +4,14 @@
   "description": "dinosaur.is website",
   "main": "index.js",
   "scripts": {
-    "start": "npm-run-all -p js:watch css:watch",
+    "start": "npm-run-all -p js:start css:start",
+    "build": "npm-run-all -p js:build css:build",
     "js:bundle": "browserify src -g envify -g uglifyify",
     "js:build": "npm run --silent js:bundle -- -o src/bundle.js",
     "js:disc": "npm run --silent js:bundle -- --full-paths | discify --open",
-    "js:watch": "budo src:bundle.js -d src --live -- -d",
+    "js:start": "budo src:bundle.js -d src --live -- -d",
     "css:build": "postcss -u autoprefixer -u cssnano -o src/bundle.css src/index.css",
-    "css:watch": "npm run css:build -- -w",
+    "css:start": "npm run css:build -- -w",
     "push": "gh-pages -d src --repo git@github.com:ahdinosaur/ahdinosaur.github.io -b master -t",
     "deploy": "npm-run-all -s build push"
   },
