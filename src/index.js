@@ -1,47 +1,54 @@
-var $ = require('jquery')
-var contain = require('contain-cover').contain
 var deobfuscate = require('./deobfuscate')
+var pull = require('pull-stream/pull')
+var drain = require('pull-stream/sinks/drain')
+var rainbow = require('rainbow-pixels')
+var toCanvas = require('pixels-canvas')
+var raf = require('pull-raf')
 
 deobfuscate()
 
 var container = document.querySelector('.main-image')
 var image = new Image()
-image.src = './images/mikey-large.jpg'
 container.appendChild(image)
 
-console.log('clientWidth', container.clientWidth)
-console.log('clientHeight', container.clientHeight)
-console.log('width', image.width)
-console.log('height', image.height)
+var canvas = document.createElement('canvas')
+canvas.height = '1'
+container.appendChild(canvas)
 
+var canvasDrain
 window.addEventListener('resize', function (ev) {
   scale()
 }, false)
 scale()
 
 function scale () {
+  if (canvasDrain) canvasDrain.abort()
+  image.style.display = 'none'
+  canvas.style.display = 'none'
+  container.style.width = 'unset'
+  container.style.height = 'unset'
+
   var bounds = container.getBoundingClientRect()
-  var dimensions = contain(
-    bounds.width,
-    bounds.height,
-    image.width,
-    image.height
-  )
-  console.log('dimensions', container.getBoundingClientRect(), dimensions)
-  image.width = dimensions.width
-  image.height = dimensions.height
-  image.style.left = (bounds.x + dimensions.x) + 'px'
-  image.style.top = (bounds.y + dimensions.y) + 'px'
-}
+  if (bounds.width > 800) {
+    image.src = './images/mikey-large.jpg'
+    container.style.backgroundImage = 'unset'
+    canvas.style.height = container.style.height = bounds.height + 'px'
+    canvas.style.width = container.style.width = bounds.width + 'px'
+    image.style.display = 'unset'
+    canvas.style.display = 'unset'
 
-var canvas = document.createElement('canvas')
-container.appendChild(canvas)
-
-var context = canvas.getContext('2d')
-console.log('context', context)
-context.fillStyle = 'red'
-//context.fillRect(0, 0, canvas.width, canvas.height)
-
-function contain (containerWidth, containerHeight, width, height) {
-  
+    canvasDrain = drain(toCanvas(canvas))
+    
+    pull(
+      rainbow({
+        inc: 2,
+        shape: [64]
+      }),
+      raf(),
+      canvasDrain
+    )
+  } else {
+    image.src = null
+    container.style.backgroundImage = 'url(./images/mikey-small.jpg)'
+  }
 }

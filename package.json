@@ -39,6 +39,10 @@
     "contain-cover": "^0.2.1",
     "jquery": "^2.2.3",
     "munge": "^0.1.7",
+    "pixels-canvas": "^1.0.5",
+    "pull-raf": "^1.0.1",
+    "pull-stream": "^3.4.0",
+    "rainbow-pixels": "^4.0.0",
     "randomstring": "^1.1.5"
   }
 }
