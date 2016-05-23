@@ -23,6 +23,8 @@ a {
 @media all and (min-width: 800px) {
   .main-image {
     background-image: url('./images/mikey-large.jpg');
+    background-size: contain;
+    background-attachment: fixed;
   }
 
   header {
@@ -52,6 +54,7 @@ a {
 @media all and (max-width: 800px) {
   .main-image {
     background-image: url('./images/mikey-small.jpg');
+    background-size: cover;
   }
 
   header {
@@ -115,9 +118,7 @@ header {
   display: flex;
   justify-content: center;
   background-repeat: no-repeat;
-  background-size: contain;
   background-position: center;
-  background-attachment: fixed;
 }
 
 .main-image img {
