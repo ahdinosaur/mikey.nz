@@ -43,7 +43,9 @@ function createRainbow () {
       pull(
         rainbow({
           inc: 2,
-          shape: [64]
+          shape: [64],
+          saturation: 80,
+          lightness: 60
         }),
         raf(),
         canvasDrain
