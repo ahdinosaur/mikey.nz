@@ -44,6 +44,7 @@ a {
   header p {
     flex-grow: 1;
     font-size: 1.8rem;
+    text-align: right;
   }
 
   nav .icon {
