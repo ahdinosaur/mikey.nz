@@ -9,7 +9,6 @@
 /campjs-viii-ludditejs  https://ahdinosaur.github.io/campjs-viii-ludditejs
 /cobudget-landing  https://ahdinosaur.github.io/cobudget-landing
 /community  https://ahdinosaur.github.io/community
-/dweb-2018/* https://ahdinosaur.github.io/dweb-2018/:splat 200
 /flashtag  https://ahdinosaur.github.io/flashtag
 /git101  https://ahdinosaur.github.io/git101
 /gl-oscilloscope  https://ahdinosaur.github.io/gl-oscilloscope
@@ -38,3 +37,6 @@
 /unbazaar  https://ahdinosaur.github.io/unbazaar
 /vdom-render-stream  https://ahdinosaur.github.io/vdom-render-stream
 /virtual-canvas  https://ahdinosaur.github.io/virtual-canvas
+
+/dweb-2018 /dweb-2018/
+/dweb-2018/* https://ahdinosaur.github.io/dweb-2018/:splat 200
