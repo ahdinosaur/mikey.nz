@@ -38,5 +38,4 @@
 /vdom-render-stream  https://ahdinosaur.github.io/vdom-render-stream
 /virtual-canvas  https://ahdinosaur.github.io/virtual-canvas
 
-/dweb-2018 /dweb-2018/
 /dweb-2018/* https://ahdinosaur.github.io/dweb-2018/:splat 200
