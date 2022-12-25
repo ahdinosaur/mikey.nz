@@ -19,6 +19,7 @@ export function Layout(props: LayoutProps) {
     <Box sx={{ padding: 2 }}>
       <Box
         as='header'
+        id='header'
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -52,6 +53,7 @@ export function Layout(props: LayoutProps) {
 
       <Box
         as='footer'
+        id='footer'
         sx={{
           padding: 2, 
           display: 'flex',

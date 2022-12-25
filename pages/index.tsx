@@ -14,6 +14,8 @@ export default function Home() {
     <>
       <NextSeo />
       <main>
+        <Canvas />
+
         <Box
           sx={{
             display: 'flex',
@@ -28,7 +30,6 @@ export default function Home() {
               maxHeight: '80vh'
             }}
           >
-            <Canvas />
 
             <Image
               src={Profile}
