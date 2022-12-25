@@ -11,6 +11,82 @@ export function Canvas(props: CanvasProps) {
   const progRef = useRef<any>(null)
 
   useEffect(() => {
+    const canvasEl = canvasRef.current
+    if (canvasEl == null) return
+
+    const gl = context(canvasEl)
+    const prog = program(gl, `
+      precision mediump float;
+
+      attribute vec2 position;
+
+      void main() {
+        gl_Position = vec4(position, 0, 1);
+      }
+    `, `
+      precision mediump float;
+
+      ${noise2dShader}
+      ${hslShader}
+
+      uniform vec2 u_resolution;
+      uniform float u_time;
+
+      void main () {
+        vec2 coord = gl_FragCoord.xy / u_resolution;
+        float time = u_time / 1000.0;
+        vec3 pos = vec3(
+          coord.x * 10.0,
+          coord.y * 10.0,
+          u_time / 1000.0
+        );
+        float value = mod(0.8 + cnoise(pos), 1.0);
+
+        float hue = value;
+        float saturation = 0.6;
+        float brightness = 0.6;
+
+        vec3 rgb = hsl2rgb(hue, saturation, brightness);
+
+        gl_FragColor = vec4(rgb, 1.0);
+      }
+    `)
+    attribute(
+      gl,
+      'position',
+      [
+        -1.0, -1.0,
+        1.0, -1.0,
+        -1.0, 1.0,
+        -1.0, 1.0,
+        1.0, -1.0,
+        1.0, 1.0,
+      ],
+      prog
+    )
+    uniform(
+      prog,
+      'u_resolution',
+      [1.0, 1.0],
+    )
+    uniform(
+      prog,
+      'u_time',
+      {
+        data: 0.0,
+        type: gl.FLOAT
+      },
+    )
+
+    glRef.current = gl
+    progRef.current = prog
+  }, [])
+
+  useEffect(() => {
+    const gl = glRef.current
+    const prog = progRef.current
+    if (gl == null) return
+
     updateSize()
 
     window.addEventListener('resize', updateSize)
@@ -33,57 +109,28 @@ export function Canvas(props: CanvasProps) {
       canvasEl.style.left = '0px'
       canvasEl.style.right = '0px'
       canvasEl.style.width = '100vw'
+
+      uniform(
+        prog,
+        'u_resolution',
+        [mainRect.width, mainRect.height],
+      )
     }
   }, [])
 
-  useEffect(() => {
-    const canvasEl = canvasRef.current
-    if (canvasEl == null) return
-
-    const gl = context(canvasEl)
-    const prog = program(gl, `
-      precision mediump float;
-
-      attribute vec2 position;
-
-      void main() {
-        gl_Position = vec4(position, 0, 1);
-      }
-    `, `
-      precision mediump float;
-
-      ${hslShader}
-
-      void main () {
-        float hue = 0.0;
-        float saturation = 1.0;
-        float brightness = 0.5;
-        vec3 rgb = hsl2rgb(hue, saturation, brightness);
-        gl_FragColor = vec4(rgb, 1.0);
-      }
-    `)
-    attribute(
-      gl,
-      'position',
-      [
-        -1.0, -1.0,
-        1.0, -1.0,
-        -1.0, 1.0,
-        -1.0, 1.0,
-        1.0, -1.0,
-        1.0, 1.0,
-      ],
-      prog
-    )
-
-    glRef.current = gl
-    progRef.current = prog
-  }, [])
-
-  useRaf((_timeElapsed) => {
+  useRaf((timeElapsed) => {
     const gl = glRef.current
     const prog = progRef.current
     if (gl == null) return
+
+    uniform(
+      prog,
+      'u_time',
+      {
+        data: timeElapsed,
+        type: gl.FLOAT,
+      }
+    )
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   })

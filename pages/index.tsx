@@ -13,13 +13,20 @@ export default function Home() {
   return (
     <>
       <NextSeo />
-      <main>
+      <Box
+        as="main"
+        sx={{
+          flexGrow: 1
+        }}
+      >
         <Canvas />
 
         <Box
           sx={{
             display: 'flex',
             justifyContent: 'center',
+            alignItems: 'center',
+            height: '100%',
           }}
         >
           <Box
@@ -27,7 +34,6 @@ export default function Home() {
               display: 'block',
               position: 'relative',
               width: '50%',
-              maxHeight: '80vh'
             }}
           >
 
@@ -42,7 +48,7 @@ export default function Home() {
             />
           </Box>
         </Box>
-      </main>
+      </Box>
     </>
   )
 }

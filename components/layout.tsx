@@ -16,10 +16,16 @@ export function Layout(props: LayoutProps) {
   const { children } = props
 
   return (
-    <Box sx={{ padding: 2 }}>
+    <Box
+      sx={{
+        padding: 2,
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Box
         as='header'
-        id='header'
         sx={{
           display: 'flex',
           justifyContent: 'space-between',
@@ -53,7 +59,6 @@ export function Layout(props: LayoutProps) {
 
       <Box
         as='footer'
-        id='footer'
         sx={{
           padding: 2, 
           display: 'flex',
@@ -73,8 +78,8 @@ interface NavProps {}
 
 function Nav(props: NavProps) {
   return (
-    <Box as='nav'>
-      <List sx={{ display: 'flex', gap: 2 }}>
+    <Box as='nav' sx={{ fontSize: '2xl' }}>
+      <List sx={{ display: 'flex', gap: 4 }}>
         <ListItem>
           <Link as={NextLink} href='/about'>
             About
@@ -127,7 +132,7 @@ const socialLinks: Array<SocialLinkDescriptor> = [
 export function Socials() {
   return (
     <Box as='nav'>
-      <List sx={{ display: 'flex', gap: 4 }}>
+      <List sx={{ display: 'flex', gap: 6 }}>
         {socialLinks.map((socialLink) => (
           <ListItem key={socialLink.href}>
             <SocialLink  {...socialLink} />
@@ -145,7 +150,7 @@ function SocialLink(props: SocialLinkProps) {
 
   return (
     <Link href={href} rel="me" isExternal>
-      <Icon as={SocialIcon} aria-label={label} />
+      <Icon as={SocialIcon} aria-label={label} boxSize={8} />
     </Link>
   )
 }
