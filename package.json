@@ -1,56 +1,29 @@
 {
   "name": "dinosaur.is",
-  "version": "0.0.0",
-  "description": "dinosaur.is website",
-  "main": "index.js",
+  "version": "0.1.0",
+  "private": true,
   "scripts": {
-    "start": "npm-run-all -p js:start css:start",
-    "build": "npm-run-all -p js:build css:build",
-    "js:bundle": "browserify src -g envify -g uglifyify",
-    "js:build": "npm run --silent js:bundle -- -o src/bundle.js",
-    "js:disc": "npm run --silent js:bundle -- --full-paths | discify --open",
-    "js:start": "budo src:bundle.js -d src --live -- -d",
-    "css:build": "postcss -u autoprefixer -u cssnano -o src/bundle.css src/index.css",
-    "css:start": "npm run css:build -- -w",
-    "push": "gh-pages -d src --repo git@github.com:ahdinosaur/ahdinosaur.github.io -b master -t",
-    "deploy": "npm-run-all -s build push"
-  },
-  "browserify": {
-    "transform": []
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ahdinosaur/dinosaur.is.git"
-  },
-  "keywords": [],
-  "author": "Mikey <michael.williams@enspiral.com> (http://dinosaur.is)",
-  "license": "Apache-2.0",
-  "bugs": {
-    "url": "https://github.com/ahdinosaur/dinosaur.is/issues"
-  },
-  "homepage": "https://github.com/ahdinosaur/dinosaur.is#readme",
-  "devDependencies": {
-    "autoprefixer": "^6.3.6",
-    "browserify": "^13.0.0",
-    "budo": "^8.1.0",
-    "cssnano": "^3.6.2",
-    "disc": "^1.3.2",
-    "envify": "^3.4.0",
-    "gh-pages": "^0.11.0",
-    "npm-run-all": "^1.6.0",
-    "postcss-autoreset": "^1.1.5",
-    "postcss-cli": "^2.5.2",
-    "postcss-font-magician": "^1.4.0",
-    "postcss-initial": "^1.5.1",
-    "uglifyify": "^3.0.1",
-    "watchify": "^3.7.0"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
   },
   "dependencies": {
-    "munge": "^0.1.7",
-    "pixels-canvas": "^1.1.0",
-    "pull-raf": "^1.0.1",
-    "pull-stream": "^3.4.0",
-    "rainbow-pixels": "^4.0.0",
-    "randomstring": "^1.1.5"
+    "@chakra-ui/react": "^2.4.4",
+    "@emotion/react": "^11.10.5",
+    "@emotion/styled": "^11.10.5",
+    "@next/font": "13.1.0",
+    "@types/node": "18.11.17",
+    "@types/react": "18.0.26",
+    "@types/react-dom": "18.0.10",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.1.0",
+    "framer-motion": "^8.0.2",
+    "next": "13.1.0",
+    "next-seo": "^5.15.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-icons": "^4.7.1",
+    "typescript": "4.9.4"
   }
 }
