@@ -31,6 +31,7 @@ export function Layout(props: LayoutProps) {
           flexGrow: 0,
           flexShrink: 0,
           display: 'flex',
+          flexWrap: 'wrap',
           justifyContent: 'space-between',
           alignItems: 'baseline',
           borderBottomWidth: 1,

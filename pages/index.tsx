@@ -37,11 +37,13 @@ export default function Home() {
             }}
           >
 
-            <Image
+            <Box
+              as={Image}
               src={Profile}
               alt={"Photo of Mikey in Glenorchy, New Zealand"}
               priority
-              style={{
+              sx={{
+                borderRadius: '50%',
                 objectFit: 'contain',
                 maxHeight: '100%',
               }}
