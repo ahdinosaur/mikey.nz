@@ -43,8 +43,8 @@ export function Canvas(props: CanvasProps) {
         float value = mod(0.8 + cnoise(pos), 1.0);
 
         float hue = value;
-        float saturation = 0.6;
-        float brightness = 0.6;
+        float saturation = 0.75;
+        float brightness = 0.75;
 
         vec3 rgb = hsl2rgb(hue, saturation, brightness);
 
@@ -102,8 +102,18 @@ export function Canvas(props: CanvasProps) {
       if (mainEl == null) throw new Error('<main> not found')
       const mainRect = mainEl.getBoundingClientRect()
 
+      /*
+      const headerEl = document.querySelector('header#header')
+      if (headerEl == null) throw new Error('<header> not found')
+      const headerRect = headerEl.getBoundingClientRect()
+
+      const footerEl = document.querySelector('footer#footer')
+      if (footerEl == null) throw new Error('<footer> not found')
+      const footerRect = footerEl.getBoundingClientRect()
+      */
+
       canvasEl.style.display = 'block'
-      canvasEl.style.position = 'fixed'
+      canvasEl.style.position = 'absolute'
       canvasEl.style.top = `${mainRect.top}px`
       canvasEl.style.height = `${mainRect.height}px`
       canvasEl.style.left = '0px'

@@ -1,5 +1,4 @@
 import { Inter } from '@next/font/google'
-import Head from 'next/head'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 import { Box } from '@chakra-ui/react'
@@ -16,17 +15,18 @@ export default function Home() {
       <Box
         as="main"
         sx={{
-          flexGrow: 1
+          flexGrow: 1,
+          display: 'flex',
         }}
       >
         <Canvas />
 
         <Box
           sx={{
+            flexGrow: 1,
             display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
-            height: '100%',
           }}
         >
           <Box

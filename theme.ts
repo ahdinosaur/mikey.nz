@@ -4,8 +4,8 @@ export const theme = extendTheme({
   styles: {
     global: {
       'html, body, body > div': {
-        height: '100%',
-      }
+        minHeight: '100%',
+      },
     }
   }
 })

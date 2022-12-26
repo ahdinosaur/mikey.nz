@@ -18,15 +18,18 @@ export function Layout(props: LayoutProps) {
   return (
     <Box
       sx={{
-        padding: 2,
-        height: '100%',
+        padding: 4,
         display: 'flex',
         flexDirection: 'column',
+        height: '100vh',
       }}
     >
       <Box
         as='header'
+        id='header'
         sx={{
+          flexGrow: 0,
+          flexShrink: 0,
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'baseline',
@@ -59,7 +62,10 @@ export function Layout(props: LayoutProps) {
 
       <Box
         as='footer'
+        id='footer'
         sx={{
+          flexGrow: 0,
+          flexShrink: 0,
           padding: 2, 
           display: 'flex',
           justifyContent: 'center',
@@ -132,7 +138,12 @@ const socialLinks: Array<SocialLinkDescriptor> = [
 export function Socials() {
   return (
     <Box as='nav'>
-      <List sx={{ display: 'flex', gap: 6 }}>
+      <List
+        sx={{
+          display: 'flex',
+          paddingY: 2,
+          gap: 6,
+        }}>
         {socialLinks.map((socialLink) => (
           <ListItem key={socialLink.href}>
             <SocialLink  {...socialLink} />
@@ -149,7 +160,16 @@ function SocialLink(props: SocialLinkProps) {
   const { label, href, Icon: SocialIcon } = props
 
   return (
-    <Link href={href} rel="me" isExternal>
+    <Link
+      href={href}
+      rel="me"
+      isExternal
+      sx={{
+        display: 'block',
+        width: 8,
+        height: 8,
+      }}
+    >
       <Icon as={SocialIcon} aria-label={label} boxSize={8} />
     </Link>
   )
