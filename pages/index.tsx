@@ -34,7 +34,6 @@ export default function Home() {
               display: 'block',
               position: 'relative',
               width: '50%',
-              height: '100%',
             }}
           >
 
@@ -42,7 +41,6 @@ export default function Home() {
               src={Profile}
               alt={"Photo of Mikey in Glenorchy, New Zealand"}
               priority
-              fill
               placeholder='blur'
               sizes='50vw'
               style={{
