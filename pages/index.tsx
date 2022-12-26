@@ -34,15 +34,18 @@ export default function Home() {
               display: 'block',
               position: 'relative',
               width: '50%',
+              height: '100%',
             }}
           >
 
-            <Box
-              as={Image}
+            <Image
               src={Profile}
               alt={"Photo of Mikey in Glenorchy, New Zealand"}
               priority
-              sx={{
+              fill
+              placeholder='blur'
+              sizes='50vw'
+              style={{
                 borderRadius: '50%',
                 objectFit: 'contain',
                 maxHeight: '100%',
