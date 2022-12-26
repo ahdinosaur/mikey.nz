@@ -55,7 +55,7 @@ export default function About() {
 
         <Box as="section" aria-label='Introduction'>
           <Text>
-            Hi I'm Mikey. ☀🌱🌙🐈💜
+            Hi I&apos;m Mikey. ☀🌱🌙🐈💜
           </Text>
 
           <Meta
