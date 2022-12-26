@@ -164,6 +164,7 @@ export function Canvas(props: CanvasProps) {
   return (
     <canvas
       ref={canvasRef}
+      aria-label='Dynamic rainbow background created from classic perlin noise.'
       style={{
         display: 'none'
       }}

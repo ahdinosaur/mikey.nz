@@ -85,7 +85,13 @@ interface NavProps {}
 
 function Nav(props: NavProps) {
   return (
-    <Box as='nav' sx={{ fontSize: '2xl' }}>
+    <Box
+      as='nav'
+      aria-label="Main"
+      sx={{
+        fontSize: '2xl'
+      }}
+    >
       <List sx={{ display: 'flex', gap: 4 }}>
         <ListItem>
           <Link as={NextLink} href='/about'>
@@ -138,7 +144,10 @@ const socialLinks: Array<SocialLinkDescriptor> = [
 
 export function Socials() {
   return (
-    <Box as='nav'>
+    <Box
+      as='nav'
+      aria-label="Social"
+    >
       <List
         sx={{
           display: 'flex',
