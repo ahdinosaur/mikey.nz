@@ -39,8 +39,8 @@ export function Canvas(props: CanvasProps) {
       void main () {
         vec2 coord = gl_FragCoord.xy / u_resolution.xy;
         vec3 uv = vec3(
-          u_seed.x + coord.x * 15.0,
-          u_seed.y + coord.y * 15.0,
+          u_seed.x + coord.x * 2.0,
+          u_seed.y + coord.y * 2.0,
           u_time / 2500.0
         );
         float value = mod(0.8 + cnoise(uv), 1.0);
@@ -114,26 +114,27 @@ export function Canvas(props: CanvasProps) {
       if (mainEl == null) throw new Error('<main> not found')
       const mainRect = mainEl.getBoundingClientRect()
 
-      /*
-      const headerEl = document.querySelector('header#header')
-      if (headerEl == null) throw new Error('<header> not found')
-      const headerRect = headerEl.getBoundingClientRect()
-
-      const footerEl = document.querySelector('footer#footer')
-      if (footerEl == null) throw new Error('<footer> not found')
-      const footerRect = footerEl.getBoundingClientRect()
-      */
+      const width = document.documentElement.clientWidth
+      const height = mainRect.height
 
       canvasEl.style.display = 'block'
       canvasEl.style.position = 'absolute'
       canvasEl.style.top = `${mainRect.top}px`
-      canvasEl.style.height = `${mainRect.height}px`
+      canvasEl.style.height = `${height}px`
       canvasEl.style.left = '0px'
       canvasEl.style.right = '0px'
       canvasEl.style.width = '100vw'
 
-      const resolution = [document.documentElement.clientWidth, mainRect.height]
-      console.log('resolution', resolution)
+      const realToCssPixels = window.devicePixelRatio * 0.2
+      const displayWidth = Math.floor(width * realToCssPixels)
+      const displayHeight = Math.floor(height * realToCssPixels)
+
+      canvasEl.width = displayWidth
+      canvasEl.height = displayHeight
+
+      gl.viewport(0, 0, displayWidth, displayHeight);
+
+      const resolution = [displayWidth, displayHeight]
 
       uniform(
         prog,
