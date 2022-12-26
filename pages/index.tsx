@@ -31,6 +31,7 @@ export default function Home() {
               display: 'block',
               position: 'relative',
               width: '50%',
+              maxWidth: '50vh',
             }}
           >
 
