@@ -44,10 +44,13 @@ export default function About() {
             <Image
               src={Profile}
               alt={"Photo of Mikey in Glenorchy, New Zealand"}
+              width="256"
+              height="256"
               priority
               style={{
                 objectFit: 'contain',
                 width: '100%',
+                borderRadius: '2rem',
               }}
             />
           </Box>
@@ -128,28 +131,31 @@ function Meta(props: MetaProps) {
         marginTop: 4,
         marginLeft: 4,
         display: 'flex',
-        flexWrap: 'wrap',
+        flexDirection: 'column',
 
+        'div': {
+          display: 'flex',
+          gap: 2,
+        },
         'dt': {
-          width: '25%',
+          fontWeight: 'bold',
         },
         'dt::after': {
           content: '":"'
         },
         'dd': {
-          width: '75%',
         }
       }}
     >
       {meta.map(({ name, value }) => (
-        <React.Fragment key={name}>
+        <Box key={name}>
           <Box as="dt" aria-label={name}>
             {name}
           </Box>
           <Box as="dd" aria-label={value}>
             {value}
           </Box>
-        </React.Fragment>
+        </Box>
       ))}
     </Box>
   )
