@@ -1,12 +1,7 @@
 import React from 'react'
-import { Inter } from '@next/font/google'
-import Image from 'next/image'
-import NextLink from 'next/link'
 import { NextSeo } from 'next-seo'
-import { Box, Center, Container, Heading, Link, UnorderedList, ListItem, Text } from '@chakra-ui/react'
+import { Box, Container, Heading, Text } from '@chakra-ui/react'
 import { Email } from 'react-obfuscate-email'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Contact() {
   return (
@@ -40,13 +35,15 @@ export default function Contact() {
             justifyContent: 'center',
           }}
         >
-          <Email email='michael.williams@enspiral.com'>
-            <span role='presentation'>
-              📧
-              {' '}
-            </span>
-            Email me!
-          </Email>
+          <Text>
+            <Email email='michael.williams@enspiral.com'>
+                <span role='presentation'>
+                  📧
+                  {' '}
+                </span>
+                Email me!
+            </Email>
+          </Text>
         </Box>
 
       </Container>

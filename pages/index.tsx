@@ -1,12 +1,9 @@
-import { Inter } from '@next/font/google'
 import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 import { Box } from '@chakra-ui/react'
 
 import Profile from '../images/mikey.jpg'
 import { Canvas } from '../components/canvas'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
   return (

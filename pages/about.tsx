@@ -1,13 +1,10 @@
 import React from 'react'
-import { Inter } from '@next/font/google'
 import Image from 'next/image'
 import NextLink from 'next/link'
 import { NextSeo } from 'next-seo'
 import { Box, Center, Container, Heading, Link, UnorderedList, ListItem, Text } from '@chakra-ui/react'
 
 import Profile from '../images/mikey.jpg'
-
-const inter = Inter({ subsets: ['latin'] })
 
 export default function About() {
   return (
