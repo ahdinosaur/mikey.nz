@@ -67,7 +67,6 @@ export function Layout(props: LayoutProps) {
         sx={{
           flexGrow: 0,
           flexShrink: 0,
-          padding: 2, 
           display: 'flex',
           justifyContent: 'center',
           borderTopWidth: 1,
@@ -92,7 +91,12 @@ function Nav(props: NavProps) {
         fontSize: '2xl'
       }}
     >
-      <List sx={{ display: 'flex', gap: 4 }}>
+      <List
+        sx={{
+          display: 'flex',
+          gap: 4,
+        }}
+      >
         <ListItem>
           <Link as={NextLink} href='/about'>
             About
@@ -147,11 +151,13 @@ export function Socials() {
     <Box
       as='nav'
       aria-label="Social"
+      sx={{
+        paddingTop: 2,
+      }}
     >
       <List
         sx={{
           display: 'flex',
-          paddingY: 2,
           gap: 6,
         }}>
         {socialLinks.map((socialLink) => (
