@@ -19,7 +19,7 @@ export function Canvas(props: CanvasProps) {
       attributes: {}
     })
     const prog = program(gl, `
-      precision mediump float;
+      precision highp float;
 
       attribute vec2 position;
 
@@ -27,7 +27,7 @@ export function Canvas(props: CanvasProps) {
         gl_Position = vec4(position, 0, 1);
       }
     `, `
-      precision mediump float;
+      precision highp float;
 
       ${noise2dShader}
       ${hslShader}
