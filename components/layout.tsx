@@ -1,6 +1,7 @@
-import { Box, List, ListItem, Heading, Text, Icon, Link, HStack, VStack } from '@chakra-ui/react'
+import { Box, List, ListItem, Heading, Text, Icon, Link, LinkProps, HStack, VStack } from '@chakra-ui/react'
 import React from 'react'
 import NextLink from 'next/link'
+import { useRouter } from 'next/router'
 import {
   FaGithub,
   FaTwitter,
@@ -90,11 +91,11 @@ interface NavItem {
 const navItems: Array<NavItem> = [
   {
     label: 'About',
-    href: './about',
+    href: '/about',
   },
   {
     label: 'Contact',
-    href: './contact',
+    href: '/contact',
   },
   {
     label: 'Blog',
@@ -111,6 +112,8 @@ const navItems: Array<NavItem> = [
 interface NavProps {}
 
 function Nav(props: NavProps) {
+  const router = useRouter()
+
   return (
     <Box
       as='nav'
@@ -127,9 +130,18 @@ function Nav(props: NavProps) {
       >
         {navItems.map(navItem => {
           const { label, href, isExternal } = navItem
+
           return (
             <ListItem key={href}>
-              <Link as={NextLink} href={href} isExternal={isExternal}>
+              <Link
+                as={NextLink}
+                href={href}
+                isExternal={isExternal}
+                aria-current={router.pathname === href ? 'page' : undefined}
+                _activeLink={{
+                  fontWeight: 'bold'
+                }}
+              >
                 {label}
               </Link>
             </ListItem>
