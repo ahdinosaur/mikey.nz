@@ -80,6 +80,33 @@ export function Layout(props: LayoutProps) {
   )
 }
 
+interface NavItem {
+  label: string
+  href: string
+  isExternal?: boolean
+}
+
+const navItems: Array<NavItem> = [
+  {
+    label: 'About',
+    href: './about',
+  },
+  {
+    label: 'Contact',
+    href: './contact',
+  },
+  {
+    label: 'Blog',
+    href: 'https://blog.dinosaur.is',
+    isExternal: true,
+  },
+  {
+    label: 'CV',
+    href: 'https://cv.dinosaur.is',
+    isExternal: true,
+  },
+]
+
 interface NavProps {}
 
 function Nav(props: NavProps) {
@@ -97,21 +124,16 @@ function Nav(props: NavProps) {
           gap: 4,
         }}
       >
-        <ListItem>
-          <Link as={NextLink} href='/about'>
-            About
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link as={NextLink} href='/contact'>
-            Contact
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link as={NextLink} href='https://blog.dinosaur.is' isExternal>
-            Blog
-          </Link>
-        </ListItem>
+        {navItems.map(navItem => {
+          const { label, href, isExternal } = navItem
+          return (
+            <ListItem key={href}>
+              <Link as={NextLink} href={href} isExternal={isExternal}>
+                {label}
+              </Link>
+            </ListItem>
+          )
+        })}
       </List>
     </Box>
   )

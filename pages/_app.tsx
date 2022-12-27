@@ -11,11 +11,11 @@ export default function App({ Component, pageProps }: AppProps) {
       <DefaultSeo
         titleTemplate='Mikey (@ahdinosaur) : %s'
         defaultTitle='Mikey (@ahdinosaur)'
-        description='Solarpunk artist, developer, and teacher.'
+        description="Hi I'm Mikey. ☀🌱🌙🐈💜"
         openGraph={{
           images: [
             {
-              url: '/images/mikey-large.jpg',
+              url: '/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmikey.ce92f95a.jpg&w=1080&q=75',
               alt: 'Mikey (@ahdinosaur)',
               type: 'image/jpeg'
             }
