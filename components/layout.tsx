@@ -37,6 +37,7 @@ export function Layout(props: LayoutProps) {
           borderBottomWidth: 1,
           borderBottomStyle: 'solid',
           borderBottomColor: 'rgb(230, 230, 230)',
+          fontFamily: 'heading',
         }}
       >
         <Link
@@ -49,7 +50,7 @@ export function Layout(props: LayoutProps) {
             gap: 2,
           }}
         >
-          <Heading as='h1'>
+          <Heading as='h1' size='2xl'>
             Mikey
           </Heading>
           <Text>

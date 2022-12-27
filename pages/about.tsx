@@ -175,13 +175,12 @@ function ListSection(props: ListSectionProps) {
       as="section"
       aria-label={name}
     >
-      <Heading>
+      <Heading size='lg'>
         <span role="presentation">
           {emoji}
           {' '}
         </span>
         {name}
-        :
       </Heading>
 
       <UnorderedList>
