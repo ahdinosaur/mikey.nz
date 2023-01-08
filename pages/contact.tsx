@@ -36,7 +36,7 @@ export default function Contact() {
           }}
         >
           <Text>
-            <Email email='michael.williams@enspiral.com'>
+            <Email email='hello@mikey.nz'>
                 <span role='presentation'>
                   📧
                   {' '}
