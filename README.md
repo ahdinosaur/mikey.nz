@@ -12,7 +12,7 @@ npm run dev
 
 The Apache License
 
-Copyright &copy; 2016 Michael Williams
+Copyright &copy; 2023 Michael Williams
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
