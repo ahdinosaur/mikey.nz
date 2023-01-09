@@ -31,17 +31,18 @@ export default function App({ Component, pageProps }: AppProps) {
         defaultTitle='Mikey (@ahdinosaur)'
         description="Hi I'm Mikey. ☀🌱🌙🐈💜"
         openGraph={{
+          type: 'website',
           images: [
             {
               url: `${URL_ROOT}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmikey.ce92f95a.jpg&w=1080&q=75`,
-              alt: 'Mikey (@ahdinosaur)',
+              alt: 'Photo of Mikey in Glenorchy, New Zealand',
               type: 'image/jpeg'
             }
           ]
         }}
         twitter={{
           handle: '@ahdinosaur',
-          cardType: 'summary_large_image'
+          cardType: 'summary'
         }}
       />
       <ChakraProvider theme={theme} resetCSS>
