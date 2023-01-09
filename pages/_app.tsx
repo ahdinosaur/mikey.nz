@@ -7,7 +7,7 @@ import { init } from "@socialgouv/matomo-next"
 import { theme } from '../theme'
 import { Layout } from '../components/layout'
 
-const URL_ROOT = process.env.NEXT_PUBLIC_VERCEL
+const URL_ROOT = process.env.NEXT_PUBLIC_VERCEL_URL
   ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   : ''
 
