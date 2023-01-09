@@ -99,12 +99,12 @@ const navItems: Array<NavItem> = [
   },
   {
     label: 'Blog',
-    href: 'https://blog.dinosaur.is',
+    href: 'https://blog.mikey.nz',
     isExternal: true,
   },
   {
     label: 'CV',
-    href: 'https://cv.dinosaur.is',
+    href: 'https://cv.mikey.nz',
     isExternal: true,
   },
 ]
