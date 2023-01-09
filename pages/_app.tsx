@@ -1,6 +1,8 @@
+import React, { useEffect } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
+import { init } from "@socialgouv/matomo-next"
 
 import { theme } from '../theme'
 import { Layout } from '../components/layout'
@@ -9,7 +11,19 @@ const URL_ROOT = process.env.VERCEL
   ? `https://${process.env.VERCEL_URL}`
   : ''
 
+const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL
+const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID
+
 export default function App({ Component, pageProps }: AppProps) {
+  useEffect(() => {
+    if (MATOMO_URL && MATOMO_SITE_ID) {
+      init({
+        url: MATOMO_URL,
+        siteId: MATOMO_SITE_ID,
+      })
+    }
+  }, [])
+
   return (
     <>
       <DefaultSeo
