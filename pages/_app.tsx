@@ -4,6 +4,7 @@ import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import { init } from "@socialgouv/matomo-next"
 
+import Image from '../images/mikey-opengraph.jpg'
 import { theme } from '../theme'
 import { Layout } from '../components/layout'
 
@@ -30,7 +31,7 @@ export default function App({ Component, pageProps }: AppProps) {
           type: 'website',
           images: [
             {
-              url: 'https://mikey.nz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmikey-opengraph.bae71f57.jpg&w=1200&q=75',
+              url: `https://mikey.nz/_next/image?url=${encodeURIComponent(Image.src)}&w=1200&q=75`,
               alt: 'Photo of Mikey in Glenorchy, New Zealand',
               type: 'image/jpeg'
             }
