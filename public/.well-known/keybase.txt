@@ -1,0 +1,56 @@
+==================================================================
+https://keybase.io/dinosaur
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://mikey.nz
+  * I am dinosaur (https://keybase.io/dinosaur) on keybase.
+  * I have a public key ASA-gjVkJ4g9yhk5n7Zvs4wb5U2LbvVyqyaqBcsSVicmdgo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "01017a822cf799fc7dc474ac4d00ceb095a7a1aaf9cbb95f3012450fc00933e765380a",
+      "host": "keybase.io",
+      "kid": "01203e82356427883dca19399fb66fb38c1be54d8b6ef572ab26aa05cb12562726760a",
+      "uid": "02b2eb695b5b9967b5ccdda3c654f900",
+      "username": "dinosaur"
+    },
+    "merkle_root": {
+      "ctime": 1673310632,
+      "hash": "4ff511c1ca2da94b9b7358e71af90fc0660f8af76e3297808342cc4773880c652e3d583884252fe4257138f9b7e62a9677785ba003175a8a5a8fad3794fd3ba8",
+      "hash_meta": "f18298de81c6ed65505d9a05121021e3d1602c427474617ede8ca3c19b2c361e",
+      "seqno": 23840391
+    },
+    "service": {
+      "entropy": "BSqaV0kkTBca0A0xBqxWZOIO",
+      "hostname": "mikey.nz",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "6.0.2"
+  },
+  "ctime": 1673310675,
+  "expire_in": 504576000,
+  "prev": "f5c2ddf1c0658ab68aca57527e0ed96c0f7713ee564190993a55987d870046ed",
+  "seqno": 29,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgPoI1ZCeIPcoZOZ+2b7OMG+VNi271cqsmqgXLElYnJnYKp3BheWxvYWTESpcCHcQg9cLd8cBliraKyldSfg7ZbA93E+5WQZCZOlWYfYcARu3EIH3Dkj7OwL+IR4po1zEBj+rOFkNY/auc1QD3tx85mAIeAgHCo3NpZ8RASFu9C1LD/UyrQ+FQ4SoCtK6JCdOV6rCxaDYWN/f/UPWRqyiO9sE2eWrATvjtisLq/iY0h31OotI0Q+BpM63yAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIJUUhoau2Gza2ZEjeXIKH5vJ3Y6VAwyjpKZVXKlz9zPJo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/dinosaur
+
+==================================================================
