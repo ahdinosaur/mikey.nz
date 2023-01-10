@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
         }}
         twitter={{
           handle: '@ahdinosaur',
-          cardType: 'summary'
+          cardType: 'summary_large_image'
         }}
       />
       <ChakraProvider theme={theme} resetCSS>
