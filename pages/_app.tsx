@@ -7,10 +7,6 @@ import { init } from "@socialgouv/matomo-next"
 import { theme } from '../theme'
 import { Layout } from '../components/layout'
 
-const URL_ROOT = process.env.NEXT_PUBLIC_VERCEL_URL
-  ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  : ''
-
 const MATOMO_URL = process.env.NEXT_PUBLIC_MATOMO_URL
 const MATOMO_SITE_ID = process.env.NEXT_PUBLIC_MATOMO_SITE_ID
 
@@ -34,7 +30,7 @@ export default function App({ Component, pageProps }: AppProps) {
           type: 'website',
           images: [
             {
-              url: `${URL_ROOT}/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmikey.ce92f95a.jpg&w=1080&q=75`,
+              url: 'https://mikey.nz/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmikey-opengraph.bae71f57.jpg&w=1200&q=75',
               alt: 'Photo of Mikey in Glenorchy, New Zealand',
               type: 'image/jpeg'
             }

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import { NextSeo } from 'next-seo'
 import { Box } from '@chakra-ui/react'
 
-import Profile from '../images/mikey.jpg'
+import Profile from '../images/mikey-square.jpg'
 import { Canvas } from '../components/canvas'
 
 export default function Home() {

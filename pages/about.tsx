@@ -31,26 +31,17 @@ export default function About() {
         </Heading>
 
         <Center>
-          <Box
-            sx={{
-              display: 'block',
-              position: 'relative',
-              width: '50%'
+          <Image
+            src={Profile}
+            alt={"Photo of Mikey in Glenorchy, New Zealand"}
+            width={512}
+            priority
+            style={{
+              objectFit: 'contain',
+              width: '100%',
+              borderRadius: '2rem',
             }}
-          >
-            <Image
-              src={Profile}
-              alt={"Photo of Mikey in Glenorchy, New Zealand"}
-              width="256"
-              height="256"
-              priority
-              style={{
-                objectFit: 'contain',
-                width: '100%',
-                borderRadius: '2rem',
-              }}
-            />
-          </Box>
+          />
         </Center>
 
         <Box as="section" aria-label='Introduction'>
