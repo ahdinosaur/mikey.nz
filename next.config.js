@@ -4,9 +4,9 @@ const { readFile } = require('fs/promises')
 const nextConfig = {
   reactStrictMode: true,
   async redirects() {
-    return (await readFile('./redirects.txt', 'utf8'))
+     return (await readFile('./redirects.txt', 'utf8'))
       .trim().split('\n')
-      .map(redirect => redirect.split(' '))
+      .map(redirect => redirect.split(/\s+/))
       .map(([source, destination]) => ({
         source: `${source}/:path*`,
         destination: `${destination}/:path*`,
