@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraBaseProvider } from '@chakra-ui/react'
 import type { AppProps } from 'next/app'
 import { DefaultSeo } from 'next-seo'
 import { init } from "@socialgouv/matomo-next"
@@ -42,11 +42,11 @@ export default function App({ Component, pageProps }: AppProps) {
           cardType: 'summary_large_image'
         }}
       />
-      <ChakraProvider theme={theme} resetCSS>
+      <ChakraBaseProvider theme={theme} resetCSS>
         <Layout>
           <Component {...pageProps} />
         </Layout>
-      </ChakraProvider>
+      </ChakraBaseProvider>
     </>
   )
 }

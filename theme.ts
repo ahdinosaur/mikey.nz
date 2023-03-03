@@ -1,9 +1,14 @@
 import { Ubuntu } from '@next/font/google'
-import { extendTheme, theme as defaultTheme } from '@chakra-ui/react'
+import { extendBaseTheme, theme as defaultTheme } from '@chakra-ui/react'
 
 const headingFont = Ubuntu({ subsets: ['latin'], weight: '400', })
 
-export const theme = extendTheme({
+const { List, Heading, Link, Container } = defaultTheme.components
+
+export const theme = extendBaseTheme({
+  components: {
+    List, Heading, Link, Container
+  },
   fonts: {
     heading: `${headingFont.style.fontFamily}, ${defaultTheme.fonts.heading}`,
   },
