@@ -112,7 +112,7 @@ const navItems: Array<NavItem> = [
 
 interface NavProps {}
 
-function Nav(props: NavProps) {
+function Nav(_props: NavProps) {
   const router = useRouter()
 
   return (
@@ -222,7 +222,7 @@ function SocialLink(props: SocialLinkProps) {
         height: 8,
       }}
     >
-      <Icon as={SocialIcon} aria-label={label} boxSize={8} />
+      <Icon as={SocialIcon as any} aria-label={label} boxSize={8} />
     </Link>
   )
 }
