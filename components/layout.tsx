@@ -40,6 +40,7 @@ export function Layout(props: LayoutProps) {
           borderBottomStyle: 'solid',
           borderBottomColor: 'rgb(230, 230, 230)',
           fontFamily: 'heading',
+          zIndex: 10,
         }}
       >
         <Link
@@ -75,6 +76,7 @@ export function Layout(props: LayoutProps) {
           borderTopWidth: 1,
           borderTopStyle: 'solid',
           borderTopColor: 'rgb(230, 230, 230)',
+          zIndex: 10,
         }}
       >
         <Socials />
