@@ -4,10 +4,11 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import {
   FaGithub,
-  FaTwitter,
   FaMastodon,
-  FaHatWizard,
 } from 'react-icons/fa'
+import { SiBluesky } from 'react-icons/si'
+import { GiNautilusShell } from 'react-icons/gi'
+import { IconType } from 'react-icons'
 
 export interface LayoutProps {
   children: React.ReactNode
@@ -60,7 +61,7 @@ export function Layout(props: LayoutProps) {
         </Link>
         <Nav />
       </Box>
-    
+
       {children}
 
       <Box
@@ -155,7 +156,7 @@ function Nav(props: NavProps) {
 interface SocialLinkDescriptor {
   label: string
   href: string
-  Icon: React.ComponentType
+  Icon: IconType
 }
 
 const socialLinks: Array<SocialLinkDescriptor> = [
@@ -170,14 +171,14 @@ const socialLinks: Array<SocialLinkDescriptor> = [
     label: `Mastodon`,
   },
   {
-    Icon: FaHatWizard,
-    href: `https://dinosaur.butt.nz`,
-    label: `Scuttlebutt`,
+    Icon: SiBluesky,
+    href: `https://bsky.app/profile/mikey.nz`,
+    label: `Bluesky`,
   },
   {
-    Icon: FaTwitter,
-    href: `https://twitter.com/ahdinosaur`,
-    label: `Twitter`,
+    Icon: GiNautilusShell,
+    href: `https://dinosaur.butt.nz`,
+    label: `Scuttlebutt`,
   },
 ]
 
