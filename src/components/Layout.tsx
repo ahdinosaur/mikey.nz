@@ -12,9 +12,7 @@ export function Layout(props: { children: React.ReactNode }) {
       padding={4}
       display="flex"
       flexDirection="column"
-      minH="100dvh"
-      bg="teal.50"
-      color="teal.900"
+      height="100dvh"
     >
       <Header />
 

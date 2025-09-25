@@ -3,7 +3,7 @@ import { Box } from "@chakra-ui/react";
 
 import { Canvas } from "@/components/Canvas";
 
-import Profile from "../../images/mikey-square.jpg";
+import Profile from "@/images/mikey-square.jpg";
 
 export default function HomePage() {
   return (
@@ -11,7 +11,6 @@ export default function HomePage() {
       as="main"
       display="flex"
       flexGrow={1}
-      position="relative"
     >
       <Canvas />
 
@@ -20,9 +19,6 @@ export default function HomePage() {
         flexGrow={1}
         justifyContent="center"
         alignItems="center"
-        zIndex={0}
-        position="relative"
-        paddingY={8}
       >
         <Box
           display="block"

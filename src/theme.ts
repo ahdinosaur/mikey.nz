@@ -12,8 +12,6 @@ const config = defineConfig({
   globalCss: {
     'html, body, body > div': {
       minHeight: '100%',
-      backgroundColor: 'teal.50',
-      color: 'teal.900',
     },
   },
 })

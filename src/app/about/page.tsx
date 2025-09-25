@@ -10,7 +10,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 
-import Profile from "../../images/mikey.jpg";
+import Profile from "@/images/mikey.jpg";
 
 export const metadata: Metadata = {
   title: "About",

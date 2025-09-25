@@ -9,37 +9,30 @@ import {
   List,
   Text,
 } from "@chakra-ui/react";
-
-type NavItem = {
-  label: string;
-  href: string;
-  external?: boolean;
-};
+import { ColorModeToggle } from "./ColorModeToggle";
 
 const navItems: NavItem[] = [
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
-  { label: "Blog", href: "https://blog.mikey.nz", external: true },
-  { label: "CV", href: "https://cv.mikey.nz", external: true },
+  { label: "Blog", href: "https://blog.mikey.nz", isExternal: true },
+  { label: "CV", href: "https://cv.mikey.nz", isExternal: true },
 ];
 
 export function Header() {
-  const pathname = usePathname();
-
   return (
     <Box
       as="header"
       id="header"
-      flexShrink={0}
       display="flex"
+      flexShrink={0}
+      flexGrow={0}
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="baseline"
       borderBottomWidth="1px"
       borderBottomStyle="solid"
-      borderBottomColor="gray.200"
+      borderBottomColor="border"
       fontFamily="heading"
-      paddingBottom={2}
     >
       <ChakraLink
         asChild
@@ -50,40 +43,61 @@ export function Header() {
         href="/"
       >
         <NextLink href="/">
-          <Heading as="h1" size="2xl">
+          <Heading as="h1" size="5xl">
             Mikey
           </Heading>
           <Text>@ahdinosaur</Text>
         </NextLink>
       </ChakraLink>
 
+
+      <Nav />
+
+      <ColorModeToggle />
+    </Box>
+  );
+}
+
+interface NavItem {
+  label: string
+  href: string
+  isExternal?: boolean
+}
+
+interface NavProps {}
+
+function Nav(_props: NavProps) {
+  const pathname = usePathname();
+
+  return (
       <Box as="nav" aria-label="Main" fontSize="2xl">
-        <List.Root display="flex" gap={4}>
-          {navItems.map((item) => {
-            const isActive =
-              !item.external && (pathname === item.href || pathname?.startsWith(item.href));
-            const commonProps = item.external
+        <List.Root unstyled display="flex" alignItems="flex-end" gap={4}>
+          {navItems.map((navItem) => {
+          const { label, href, isExternal } = navItem
+            const isActive = !isExternal && (pathname === href || pathname?.startsWith(href));
+            const commonProps = isExternal
               ? {
-                  href: item.href,
+                  href,
                   rel: "noopener noreferrer",
                   target: "_blank",
                 }
-              : { href: item.href };
+              : { href };
 
             return (
-              <List.Item key={item.href}>
+              <List.Item key={href}>
                 <ChakraLink
                   asChild
                   aria-current={isActive ? "page" : undefined}
                   fontWeight={isActive ? "bold" : undefined}
+                  textDecorationColor="currentColor"
                 >
-                  <NextLink {...commonProps}>{item.label}</NextLink>
+                  <NextLink {...commonProps}>{label}</NextLink>
                 </ChakraLink>
               </List.Item>
             );
           })}
+
         </List.Root>
       </Box>
-    </Box>
-  );
+  )
 }
