@@ -10,6 +10,9 @@ const config = defineConfig({
     },
   },
   globalCss: {
+    html: {
+      colorPalette: 'teal',
+    },
     'html, body, body > div': {
       minHeight: '100%',
     },

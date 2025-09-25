@@ -53,7 +53,7 @@ export default function AboutPage() {
             { name: 'Pronouns', value: 'he/him' },
             {
               name: 'Location',
-              value: 'Pōneke (Wellington), Aotearoa 🇳',
+              value: 'Pōneke (Wellington), Aotearoa (New Zealand)',
             },
           ]}
         />
