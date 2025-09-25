@@ -3,6 +3,11 @@ const { readFile } = require('fs/promises')
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  experimental: {
+    optimizePackageImports: ["@chakra-ui/react"],
+  },
+
   async redirects() {
      return (await readFile('./redirects.txt', 'utf8'))
       .trim().split('\n')
