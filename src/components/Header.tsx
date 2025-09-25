@@ -8,6 +8,8 @@ import {
   Link as ChakraLink,
   List,
   Text,
+  Flex,
+  BoxProps,
 } from "@chakra-ui/react";
 import { ColorModeToggle } from "./ColorModeToggle";
 
@@ -23,12 +25,12 @@ export function Header() {
     <Box
       as="header"
       id="header"
-      display="flex"
-      flexShrink={0}
-      flexGrow={0}
+      display={{ base: "flex", md: "grid" }}
+      flexDirection="row"
       flexWrap="wrap"
       justifyContent="space-between"
       alignItems="baseline"
+      gridTemplateColumns="1fr auto 1fr"
       borderBottomWidth="1px"
       borderBottomStyle="solid"
       borderBottomColor="border"
@@ -36,11 +38,13 @@ export function Header() {
     >
       <ChakraLink
         asChild
-        textDecoration="none"
+        href="/"
         display="flex"
+      order={0}
         alignItems="baseline"
         gap={2}
-        href="/"
+        textDecoration="none"
+        marginRight={8}
       >
         <NextLink href="/">
           <Heading as="h1" size="5xl">
@@ -51,9 +55,11 @@ export function Header() {
       </ChakraLink>
 
 
-      <Nav />
+      <Nav order={{ base: 2, md: 1 }} width={{ base: 'full', md: 'auto' }} />
 
-      <ColorModeToggle />
+      <Flex justify="flex-end" order={{ base: 1, md: 2 }}>
+        <ColorModeToggle />
+      </Flex>
     </Box>
   );
 }
@@ -64,13 +70,13 @@ interface NavItem {
   isExternal?: boolean
 }
 
-interface NavProps {}
+type NavProps = BoxProps
 
-function Nav(_props: NavProps) {
+function Nav(props: NavProps) {
   const pathname = usePathname();
 
   return (
-      <Box as="nav" aria-label="Main" fontSize="2xl">
+      <Box as="nav" aria-label="Main" fontSize="2xl" {...props}>
         <List.Root unstyled display="flex" alignItems="flex-end" gap={4}>
           {navItems.map((navItem) => {
           const { label, href, isExternal } = navItem

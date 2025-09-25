@@ -28,10 +28,9 @@ export function Footer() {
       borderTopWidth="1px"
       borderTopStyle="solid"
       borderTopColor="gray.200"
-      paddingTop={2}
     >
       <Box as="nav" aria-label="Social" paddingTop={2}>
-        <List.Root display="flex" gap={6}>
+        <List.Root unstyled display="flex" gap={6}>
           {socialLinks.map((item) => (
             <List.Item key={item.href}>
               <ChakraLink
