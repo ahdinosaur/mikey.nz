@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { Box } from "@chakra-ui/react";
+import NextImage from "next/image";
+import { Box, Image } from "@chakra-ui/react";
 
 import { Canvas } from "@/components/Canvas";
 
@@ -26,18 +26,15 @@ export default function HomePage() {
           width="50%"
           maxWidth="50vh"
         >
-          <Image
-            src={Profile}
-            alt={"Photo of Mikey in Glenorchy, New Zealand"}
-            priority
-            placeholder="blur"
-            sizes="50vw"
-            style={{
-              borderRadius: "50%",
-              objectFit: "contain",
-              maxHeight: "100%",
-            }}
-          />
+          <Image asChild borderRadius="50%" fit="contain" maxHeight="full">
+            <NextImage
+              src={Profile}
+              alt={"Photo of Mikey in Glenorchy, New Zealand"}
+              priority
+              placeholder="blur"
+              sizes="50vw"
+            />
+          </Image>
         </Box>
       </Box>
     </Box>

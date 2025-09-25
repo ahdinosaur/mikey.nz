@@ -1,10 +1,11 @@
 import { Metadata } from "next";
-import Image from "next/image";
+import NextImage from "next/image";
 import {
   Box,
   Link as ChakraLink,
   Center,
   Container,
+  Image,
   Heading,
   List,
   Text,
@@ -26,24 +27,21 @@ export default function AboutPage() {
       gap={8}
       marginY={8}
       aria-labelledby="about-heading"
-      maxW="container.md"
+      maxW="xl"
     >
-      <Heading as="h1" id="about-heading" textAlign="center">
+      <Heading as="h1" size="4xl" id="about-heading" textAlign="center">
         About Mikey
       </Heading>
 
       <Center>
-        <Image
-          src={Profile}
-          alt={"Photo of Mikey in Glenorchy, New Zealand"}
-          width={512}
-          priority
-          style={{
-            objectFit: "contain",
-            width: "100%",
-            borderRadius: "2rem",
-          }}
-        />
+        <Image asChild fit="contain" width="full" borderRadius="4xl">
+          <NextImage
+            src={Profile}
+            alt={"Photo of Mikey in Glenorchy, New Zealand"}
+            width={512}
+            priority
+          />
+        </Image>
       </Center>
 
       <Box as="section" aria-label="Introduction">
@@ -112,15 +110,10 @@ function Meta(props: MetaProps) {
       marginLeft={4}
       display="flex"
       flexDirection="column"
-      css={{
-        "div": { display: "flex", gap: 8, alignItems: "baseline" },
-        "dt": { fontWeight: "bold" },
-        "dt::after": { content: '":"', marginLeft: 2 },
-      }}
     >
       {meta.map(({ name, value }) => (
-        <Box key={name}>
-          <Box as="dt" aria-label={name}>
+        <Box key={name} display="flex" gap={2}>
+          <Box as="dt" aria-label={name} fontWeight="bold" _after={{ content: '":"' }}>
             {name}
           </Box>
           <Box as="dd" aria-label={value}>
@@ -143,17 +136,19 @@ function ListSection(props: ListSectionProps) {
   const { id, name, emoji, links } = props;
   return (
     <Box as="section" aria-label={name} id={id}>
-      <Heading size="lg">
+      <Heading size="3xl">
         <span role="presentation">{emoji} </span>
         {name}
       </Heading>
+
       <List.Root>
         {links.map(({ name: label, href }) => (
-          <List.Item key={href} my={1}>
+          <List.Item key={href} marginTop={2}>
             <ChakraLink
               href={href}
               rel="noopener noreferrer"
               target="_blank"
+              textDecorationColor="currentColor"
             >
               {label}
             </ChakraLink>
