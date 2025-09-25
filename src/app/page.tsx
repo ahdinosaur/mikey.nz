@@ -11,6 +11,7 @@ export default function HomePage() {
       as="main"
       display="flex"
       flexGrow={1}
+      aria-label="Mikey's website"
     >
       <Canvas />
 

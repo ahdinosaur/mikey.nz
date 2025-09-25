@@ -27,7 +27,7 @@ export function Footer() {
       justifyContent="center"
       borderTopWidth="1px"
       borderTopStyle="solid"
-      borderTopColor="gray.200"
+      borderTopColor="border"
     >
       <Box as="nav" aria-label="Social" paddingTop={2}>
         <List.Root unstyled display="flex" gap={6}>

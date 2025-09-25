@@ -17,7 +17,7 @@ export default function ContactPage() {
       gap={8}
       marginTop={8}
       aria-labelledby="contact-heading"
-      maxW="container.sm"
+      maxW="xl"
     >
       <Heading as="h1" id="contact-heading" textAlign="center">
         Contact Mikey

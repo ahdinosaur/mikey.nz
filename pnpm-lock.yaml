@@ -44,6 +44,9 @@ importers:
       react-icons:
         specifier: ^5.5.0
         version: 5.5.0(react@19.1.1)
+      react-obfuscate-email:
+        specifier: ^2.0.4
+        version: 2.0.4(react@19.1.1)
       typescript:
         specifier: ^5.8.3
         version: 5.9.2
@@ -791,6 +794,12 @@ packages:
 
   react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
+
+  react-obfuscate-email@2.0.4:
+    resolution: {integrity: sha512-XnIYz3qZQBChBPJm8+f30OT07YGLFLYDtR7Uu1Mum0K34bRa3WHAiWHuMqQ6C3bNJ60dRaAzZCMrzzPOBMlD3Q==}
+    engines: {node: '>=12'}
+    peerDependencies:
+      react: '>=16'
 
   react@19.1.1:
     resolution: {integrity: sha512-w8nqGImo45dmMIfljjMwOGtbmC/mk4CMYhWIicdSflH91J9TyCyczcPFXJzrZ/ZXcgGRFeP6BU0BEJTw6tZdfQ==}
@@ -1918,6 +1927,10 @@ snapshots:
       react: 19.1.1
 
   react-is@16.13.1: {}
+
+  react-obfuscate-email@2.0.4(react@19.1.1):
+    dependencies:
+      react: 19.1.1
 
   react@19.1.1: {}
 
