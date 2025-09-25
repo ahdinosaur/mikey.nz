@@ -1,27 +1,26 @@
-import { Box, Icon, Link as ChakraLink, List } from "@chakra-ui/react";
-import { FaGithub, FaMastodon } from "react-icons/fa";
-import { SiBluesky } from "react-icons/si";
-import { GiNautilusShell } from "react-icons/gi";
-import { IconType } from "react-icons";
+import { Box, Link as ChakraLink, Icon, List } from '@chakra-ui/react'
+import type { IconType } from 'react-icons'
+import { FaGithub, FaMastodon } from 'react-icons/fa'
+import { GiNautilusShell } from 'react-icons/gi'
+import { SiBluesky } from 'react-icons/si'
 
 type SocialLink = {
-  label: string;
-  href: string;
-  Icon: IconType;
-};
+  label: string
+  href: string
+  Icon: IconType
+}
 
 const socialLinks: SocialLink[] = [
-  { Icon: FaGithub, href: "https://www.github.com/ahdinosaur", label: "Github" },
-  { Icon: FaMastodon, href: "https://cloudisland.nz/@dinosaur", label: "Mastodon" },
-  { Icon: SiBluesky, href: "https://bsky.app/profile/mikey.nz", label: "Bluesky" },
-  { Icon: GiNautilusShell, href: "https://dinosaur.butt.nz", label: "Scuttlebutt" },
-];
+  { Icon: FaGithub, href: 'https://www.github.com/ahdinosaur', label: 'Github' },
+  { Icon: FaMastodon, href: 'https://cloudisland.nz/@dinosaur', label: 'Mastodon' },
+  { Icon: SiBluesky, href: 'https://bsky.app/profile/mikey.nz', label: 'Bluesky' },
+  { Icon: GiNautilusShell, href: 'https://dinosaur.butt.nz', label: 'Scuttlebutt' },
+]
 
 export function Footer() {
   return (
     <Box
       as="footer"
-      id="footer"
       flexShrink={0}
       display="flex"
       justifyContent="center"
@@ -43,12 +42,14 @@ export function Footer() {
                 height={8}
                 aria-label={item.label}
               >
-                <Icon boxSize={8}><item.Icon /></Icon>
+                <Icon boxSize={8}>
+                  <item.Icon />
+                </Icon>
               </ChakraLink>
             </List.Item>
           ))}
         </List.Root>
       </Box>
     </Box>
-  );
+  )
 }

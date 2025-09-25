@@ -1,19 +1,13 @@
-import { Box } from "@chakra-ui/react";
-
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
-import { Analytics } from "@/components/Analytics";
+import { Box } from '@chakra-ui/react'
+import { Analytics } from '@/components/Analytics'
+import { Footer } from '@/components/Footer'
+import { Header } from '@/components/Header'
 
 export function Layout(props: { children: React.ReactNode }) {
-  const { children } = props;
+  const { children } = props
 
   return (
-    <Box
-      padding={4}
-      display="flex"
-      flexDirection="column"
-      height="100dvh"
-    >
+    <Box padding={4} display="flex" flexDirection="column" height="100dvh">
       <Header />
 
       {children}
@@ -21,5 +15,5 @@ export function Layout(props: { children: React.ReactNode }) {
       <Footer />
       <Analytics />
     </Box>
-  );
+  )
 }

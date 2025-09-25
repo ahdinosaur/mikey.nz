@@ -1,17 +1,15 @@
-"use client";
+'use client'
 
-import React, { useEffect, useRef } from "react";
-import { Box } from "@chakra-ui/react";
-
-// @ts-ignore
-import { context, program, attribute, uniform } from "gl-util";
+// @ts-expect-error
+import { attribute, context, program, uniform } from 'gl-util'
+import { useEffect, useRef } from 'react'
 
 export interface CanvasProps {}
 
 export function Canvas(_props: CanvasProps) {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-  const glRef = useRef<any>(null);
-  const progRef = useRef<any>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const glRef = useRef<any>(null)
+  const progRef = useRef<any>(null)
 
   useEffect(() => {
     const canvasEl = canvasRef.current
@@ -19,9 +17,11 @@ export function Canvas(_props: CanvasProps) {
 
     const gl = context({
       canvas: canvasEl,
-      attributes: {}
+      attributes: {},
     })
-    const prog = program(gl, `
+    const prog = program(
+      gl,
+      `
       precision highp float;
 
       attribute vec2 position;
@@ -29,7 +29,8 @@ export function Canvas(_props: CanvasProps) {
       void main() {
         gl_Position = vec4(position, 0, 1);
       }
-    `, `
+    `,
+      `
       precision highp float;
 
       ${noise2dShader}
@@ -57,56 +58,35 @@ export function Canvas(_props: CanvasProps) {
 
         gl_FragColor = vec4(rgb, 1.0);
       }
-    `)
+    `,
+    )
     attribute(
       gl,
       'position',
-      [
-        -1.0, -1.0,
-        1.0, -1.0,
-        -1.0, 1.0,
-        -1.0, 1.0,
-        1.0, -1.0,
-        1.0, 1.0,
-      ],
-      prog
-    )
-    uniform(
+      [-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0],
       prog,
-      'u_resolution',
-      [1.0, 1.0],
     )
-    uniform(
-      prog,
-      'u_time',
-      {
-        data: 0.0,
-        type: gl.FLOAT,
-      },
-    )
-    uniform(
-      prog,
-      'u_seed',
-      [
-        1000.0 * Math.random(),
-        1000.0 * Math.random(),
-      ],
-    )
+    uniform(prog, 'u_resolution', [1.0, 1.0])
+    uniform(prog, 'u_time', {
+      data: 0.0,
+      type: gl.FLOAT,
+    })
+    uniform(prog, 'u_seed', [1000.0 * Math.random(), 1000.0 * Math.random()])
 
     glRef.current = gl
     progRef.current = prog
   }, [])
 
   useEffect(() => {
-    const gl = glRef.current;
-    const prog = progRef.current;
-    if (gl == null) return;
+    const gl = glRef.current
+    const prog = progRef.current
+    if (gl == null) return
 
-    updateSize();
-    window.addEventListener("resize", updateSize);
+    updateSize()
+    window.addEventListener('resize', updateSize)
     return () => {
-      window.removeEventListener("resize", updateSize);
-    };
+      window.removeEventListener('resize', updateSize)
+    }
 
     function updateSize() {
       const canvasEl = canvasRef.current
@@ -134,15 +114,11 @@ export function Canvas(_props: CanvasProps) {
       canvasEl.width = displayWidth
       canvasEl.height = displayHeight
 
-      gl.viewport(0, 0, displayWidth, displayHeight);
+      gl.viewport(0, 0, displayWidth, displayHeight)
 
       const resolution = [displayWidth, displayHeight]
 
-      uniform(
-        prog,
-        'u_resolution',
-        resolution,
-      )
+      uniform(prog, 'u_resolution', resolution)
     }
   }, [])
 
@@ -151,14 +127,10 @@ export function Canvas(_props: CanvasProps) {
     const prog = progRef.current
     if (gl == null) return
 
-    uniform(
-      prog,
-      'u_time',
-      {
-        data: timeElapsed,
-        type: gl.FLOAT,
-      }
-    )
+    uniform(prog, 'u_time', {
+      data: timeElapsed,
+      type: gl.FLOAT,
+    })
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   })
@@ -166,43 +138,31 @@ export function Canvas(_props: CanvasProps) {
   return (
     <canvas
       ref={canvasRef}
-      aria-label='Dynamic rainbow background created from classic perlin noise.'
+      aria-label="Dynamic rainbow background created from classic perlin noise."
       style={{
-        display: 'none'
+        display: 'none',
       }}
     />
   )
-
-  return (
-    <Box
-      as="canvas"
-      ref={canvasRef}
-      aria-label="Dynamic rainbow background created from classic perlin noise."
-      style={{ display: "none" }}
-    />
-  );
-
 }
 
-export function useRaf(
-  callback: (timeElapsed: DOMHighResTimeStamp) => void
-): void {
+export function useRaf(callback: (timeElapsed: DOMHighResTimeStamp) => void): void {
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  const cb = callback;
+  const cb = callback
 
   useEffect(() => {
-    const raf = window.requestAnimationFrame;
-    let isActive = true;
-    raf(loop);
+    const raf = window.requestAnimationFrame
+    let isActive = true
+    raf(loop)
     return () => {
-      isActive = false;
-    };
-    function loop(time: DOMHighResTimeStamp) {
-      if (!isActive) return;
-      cb(time);
-      raf(loop);
+      isActive = false
     }
-  }, [cb]);
+    function loop(time: DOMHighResTimeStamp) {
+      if (!isActive) return
+      cb(time)
+      raf(loop)
+    }
+  }, [cb])
 }
 
 // https://github.com/patriciogonzalezvivo/lygia/blob/main/generative/cnoise.glsl

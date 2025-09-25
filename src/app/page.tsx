@@ -1,36 +1,21 @@
-import NextImage from "next/image";
-import { Box, Image } from "@chakra-ui/react";
+import { Box, Image } from '@chakra-ui/react'
+import NextImage from 'next/image'
 
-import { Canvas } from "@/components/Canvas";
+import { Canvas } from '@/components/Canvas'
 
-import Profile from "@/images/mikey-square.jpg";
+import Profile from '@/images/mikey-square.jpg'
 
 export default function HomePage() {
   return (
-    <Box
-      as="main"
-      display="flex"
-      flexGrow={1}
-      aria-label="Mikey's website"
-    >
+    <Box as="main" display="flex" flexGrow={1} aria-label="Mikey's website">
       <Canvas />
 
-      <Box
-        display="flex"
-        flexGrow={1}
-        justifyContent="center"
-        alignItems="center"
-      >
-        <Box
-          display="block"
-          position="relative"
-          width="50%"
-          maxWidth="50vh"
-        >
+      <Box display="flex" flexGrow={1} justifyContent="center" alignItems="center">
+        <Box display="block" position="relative" width="50%" maxWidth="50vh">
           <Image asChild borderRadius="50%" fit="contain" maxHeight="full">
             <NextImage
               src={Profile}
-              alt={"Photo of Mikey in Glenorchy, New Zealand"}
+              alt={'Photo of Mikey in Glenorchy, New Zealand'}
               priority
               placeholder="blur"
               sizes="50vw"
@@ -39,5 +24,5 @@ export default function HomePage() {
         </Box>
       </Box>
     </Box>
-  );
+  )
 }

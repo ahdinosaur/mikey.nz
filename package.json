@@ -6,9 +6,9 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "biome check .",
-    "format": "biome check --apply .",
-    "format:unsafe": "biome check --apply-unsafe ."
+    "lint": "biome check",
+    "format": "biome check --write",
+    "format:unsafe": "biome check --write --unsafe"
   },
   "dependencies": {
     "@chakra-ui/react": "^3.27.0",

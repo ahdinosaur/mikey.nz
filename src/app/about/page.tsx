@@ -1,23 +1,25 @@
-import { Metadata } from "next";
-import NextImage from "next/image";
 import {
   Box,
-  Link as ChakraLink,
   Center,
+  Link as ChakraLink,
   Container,
-  Image,
   Heading,
+  Image,
   List,
   Text,
-} from "@chakra-ui/react";
-
-import Profile from "@/images/mikey.jpg";
+} from '@chakra-ui/react'
+import type { Metadata } from 'next'
+import NextImage from 'next/image'
+import { useId } from 'react'
+import Profile from '@/images/mikey.jpg'
 
 export const metadata: Metadata = {
-  title: "About",
-};
+  title: 'About',
+}
 
 export default function AboutPage() {
+  const headingId = useId()
+
   return (
     <Container
       as="main"
@@ -26,10 +28,10 @@ export default function AboutPage() {
       flexGrow={1}
       gap={8}
       marginY={8}
-      aria-labelledby="about-heading"
+      aria-labelledby={headingId}
       maxW="xl"
     >
-      <Heading as="h1" size="4xl" id="about-heading" textAlign="center">
+      <Heading as="h1" size="4xl" id={headingId} textAlign="center">
         About Mikey
       </Heading>
 
@@ -37,7 +39,7 @@ export default function AboutPage() {
         <Image asChild fit="contain" width="full" borderRadius="4xl">
           <NextImage
             src={Profile}
-            alt={"Photo of Mikey in Glenorchy, New Zealand"}
+            alt={'Photo of Mikey in Glenorchy, New Zealand'}
             width={512}
             priority
           />
@@ -48,59 +50,59 @@ export default function AboutPage() {
         <Text>Hi I&apos;m Mikey. ☀🌱🌙🐈💜</Text>
         <Meta
           meta={[
-            { name: "Pronouns", value: "he/him" },
+            { name: 'Pronouns', value: 'he/him' },
             {
-              name: "Location",
-              value: "Pōneke (Wellington), Aotearoa 🇳🇿",
+              name: 'Location',
+              value: 'Pōneke (Wellington), Aotearoa 🇳',
             },
           ]}
         />
       </Box>
 
       <ListSection
-        id="networks"
+        sectionId="networks"
         name="Networks"
         emoji="👪"
         links={[
-          { name: "Art~Hack", href: "https://arthack.nz" },
-          { name: "Scuttlebutt", href: "https://scuttlebutt.nz/" },
-          { name: "Enspiral", href: "https://enspiral.com/" },
-          { name: "Kiwiburn", href: "https://kiwiburn.com/" },
-          { name: "EHF", href: "https://ehf.org/" },
+          { name: 'Art~Hack', href: 'https://arthack.nz' },
+          { name: 'Scuttlebutt', href: 'https://scuttlebutt.nz/' },
+          { name: 'Enspiral', href: 'https://enspiral.com/' },
+          { name: 'Kiwiburn', href: 'https://kiwiburn.com/' },
+          { name: 'EHF', href: 'https://ehf.org/' },
         ]}
       />
 
       <ListSection
-        id="projects"
+        sectionId="projects"
         name="Projects"
         emoji="🎨"
         links={[
-          { name: "Grid Kit", href: "https://gridkit.nz/" },
-          { name: "Sunrise Choir", href: "http://sunrisechoir.com/" },
-          { name: "Peach Cloud", href: "http://peachcloud.org/" },
-          { name: "Value Flows", href: "http://valueflo.ws/" },
+          { name: 'Grid Kit', href: 'https://gridkit.nz/' },
+          { name: 'Sunrise Choir', href: 'http://sunrisechoir.com/' },
+          { name: 'Peach Cloud', href: 'http://peachcloud.org/' },
+          { name: 'Value Flows', href: 'http://valueflo.ws/' },
         ]}
       />
 
       <ListSection
-        id="companies"
+        sectionId="companies"
         name="Companies"
         emoji="🏭"
         links={[
-          { name: "Village Kit", href: "http://villagekit.com/" },
-          { name: "💀 Root Systems", href: "https://rootsystems.nz/" },
+          { name: 'Village Kit', href: 'http://villagekit.com/' },
+          { name: '💀 Root Systems', href: 'https://rootsystems.nz/' },
         ]}
       />
     </Container>
-  );
+  )
 }
 
 interface MetaProps {
-  meta: Array<{ name: string; value: string }>;
+  meta: Array<{ name: string; value: string }>
 }
 
 function Meta(props: MetaProps) {
-  const { meta } = props;
+  const { meta } = props
 
   return (
     <Box
@@ -122,20 +124,21 @@ function Meta(props: MetaProps) {
         </Box>
       ))}
     </Box>
-  );
+  )
 }
 
 interface ListSectionProps {
-  id: string;
-  name: string;
-  emoji: string;
-  links: Array<{ name: string; href: string }>;
+  sectionId: string
+  name: string
+  emoji: string
+  links: Array<{ name: string; href: string }>
 }
 
 function ListSection(props: ListSectionProps) {
-  const { id, name, emoji, links } = props;
+  const { sectionId, name, emoji, links } = props
+
   return (
-    <Box as="section" aria-label={name} id={id}>
+    <Box as="section" aria-label={name} id={sectionId}>
       <Heading size="3xl">
         <span role="presentation">{emoji} </span>
         {name}
@@ -156,5 +159,5 @@ function ListSection(props: ListSectionProps) {
         ))}
       </List.Root>
     </Box>
-  );
+  )
 }
