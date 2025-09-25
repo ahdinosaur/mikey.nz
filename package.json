@@ -5,7 +5,10 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "lint": "biome check .",
+    "format": "biome check --apply .",
+    "format:unsafe": "biome check --apply-unsafe ."
   },
   "dependencies": {
     "@chakra-ui/react": "^3.27.0",
@@ -22,5 +25,8 @@
     "react-icons": "^5.5.0",
     "react-obfuscate-email": "^2.0.4",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.2.4"
   }
 }
