@@ -1,5 +1,6 @@
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
+import type { IconType } from 'react-icons'
 import { parse as parseYaml } from 'yaml'
 
 /*
@@ -28,6 +29,7 @@ Another project?
 
 export type ProjectMeta = {
   id: string
+  icon: IconType
   start: Date
   end: Date
 }
