@@ -1,5 +1,6 @@
 'use client'
 
+import { Box } from '@chakra-ui/react'
 // @ts-expect-error
 import { attribute, context, program, uniform } from 'gl-util'
 import { useEffect, useRef } from 'react'
@@ -136,11 +137,15 @@ export function Canvas(_props: CanvasProps) {
   })
 
   return (
-    <canvas
+    <Box
+      as="canvas"
       ref={canvasRef}
       aria-label="Dynamic rainbow background created from classic perlin noise."
       style={{
         display: 'none',
+      }}
+      filter={{
+        _dark: 'brightness(0.5)',
       }}
     />
   )

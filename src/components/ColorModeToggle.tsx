@@ -13,7 +13,9 @@ export function ColorModeToggle() {
     <IconButton
       aria-label="toggle color mode"
       onClick={toggleColorMode}
-      backgroundColor={theme === 'light' ? 'teal.fg' : 'purple.fg'}
+      backgroundColor="transparent"
+      color="colorPalette.fg"
+      _hover={{ colorPalette: { base: 'purple', _dark: 'teal' } }}
     >
       {theme === 'light' ? <LuMoon /> : <LuSun />}
     </IconButton>

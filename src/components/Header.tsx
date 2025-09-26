@@ -27,24 +27,25 @@ export function Header() {
       borderBottomColor="border"
       fontFamily="heading"
     >
-      <ChakraLink
-        asChild
-        href="/"
-        display="flex"
-        order={0}
-        alignItems="baseline"
-        gap={2}
-        textDecoration="none"
-        marginRight={8}
-        _hover={{ colorPalette: 'purple' }}
-      >
-        <NextLink href="/">
-          <Heading as="h1" size="5xl">
-            Mikey
-          </Heading>
-          <Text>@ahdinosaur</Text>
-        </NextLink>
-      </ChakraLink>
+      <Box order={0} marginRight={8}>
+        <ChakraLink
+          asChild
+          href="/"
+          display="flex"
+          alignItems="baseline"
+          width="fit-content"
+          gap={2}
+          textDecoration="none"
+          _hover={{ colorPalette: { base: 'purple', _dark: 'teal' } }}
+        >
+          <NextLink href="/">
+            <Heading as="h1" size="5xl">
+              Mikey
+            </Heading>
+            <Text>@ahdinosaur</Text>
+          </NextLink>
+        </ChakraLink>
+      </Box>
 
       <Nav order={{ base: 2, md: 1 }} width={{ base: 'full', md: 'auto' }} />
 
@@ -84,6 +85,7 @@ function Nav(props: NavProps) {
             <List.Item key={href}>
               <ChakraLink
                 asChild
+                _hover={{ color: { base: 'purple.fg', _dark: 'teal.fg' } }}
                 aria-current={isActive ? 'page' : undefined}
                 fontWeight={isActive ? 'bold' : undefined}
                 textDecorationColor="currentColor"

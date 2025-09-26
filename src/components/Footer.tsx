@@ -4,17 +4,28 @@ import { FaGithub, FaMastodon } from 'react-icons/fa'
 import { GiNautilusShell } from 'react-icons/gi'
 import { SiBluesky } from 'react-icons/si'
 
-type SocialLink = {
-  label: string
-  href: string
-  Icon: IconType
-}
-
-const socialLinks: SocialLink[] = [
-  { Icon: FaGithub, href: 'https://www.github.com/ahdinosaur', label: 'Github' },
-  { Icon: FaMastodon, href: 'https://cloudisland.nz/@dinosaur', label: 'Mastodon' },
-  { Icon: SiBluesky, href: 'https://bsky.app/profile/mikey.nz', label: 'Bluesky' },
-  { Icon: GiNautilusShell, href: 'https://dinosaur.butt.nz', label: 'Scuttlebutt' },
+/* ---------- Data ---------- */
+const socialLinks: SocialLinkProps[] = [
+  {
+    Icon: FaGithub,
+    href: 'https://www.github.com/ahdinosaur',
+    label: 'Github',
+  },
+  {
+    Icon: FaMastodon,
+    href: 'https://cloudisland.nz/@dinosaur',
+    label: 'Mastodon',
+  },
+  {
+    Icon: SiBluesky,
+    href: 'https://bsky.app/profile/mikey.nz',
+    label: 'Bluesky',
+  },
+  {
+    Icon: GiNautilusShell,
+    href: 'https://dinosaur.butt.nz',
+    label: 'Scuttlebutt',
+  },
 ]
 
 export function Footer() {
@@ -29,27 +40,49 @@ export function Footer() {
       borderTopColor="border"
     >
       <Box as="nav" aria-label="Social" paddingTop={2}>
-        <List.Root unstyled display="flex" gap={6}>
-          {socialLinks.map((item) => (
-            <List.Item key={item.href}>
-              <ChakraLink
-                asChild
-                href={item.href}
-                rel="me noopener noreferrer"
-                target="_blank"
-                display="block"
-                width={8}
-                height={8}
-                aria-label={item.label}
-              >
-                <Icon boxSize={8}>
-                  <item.Icon />
-                </Icon>
-              </ChakraLink>
-            </List.Item>
-          ))}
-        </List.Root>
+        <SocialLinks links={socialLinks} />
       </Box>
     </Box>
+  )
+}
+
+type SocialLinksProps = {
+  links: SocialLinkProps[]
+}
+
+function SocialLinks({ links }: SocialLinksProps) {
+  return (
+    <List.Root unstyled display="flex" gap={6}>
+      {links.map((link) => (
+        <SocialLink key={link.href} {...link} />
+      ))}
+    </List.Root>
+  )
+}
+
+type SocialLinkProps = {
+  label: string
+  href: string
+  Icon: IconType
+}
+
+function SocialLink({ href, label, Icon: IconComponent }: SocialLinkProps) {
+  return (
+    <List.Item _hover={{ colorPalette: { base: 'purple', _dark: 'teal' } }}>
+      <ChakraLink
+        asChild
+        href={href}
+        rel="me noopener noreferrer"
+        target="_blank"
+        display="block"
+        width={8}
+        height={8}
+        aria-label={label}
+      >
+        <Icon boxSize={8}>
+          <IconComponent />
+        </Icon>
+      </ChakraLink>
+    </List.Item>
   )
 }
