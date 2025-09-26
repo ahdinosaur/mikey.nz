@@ -36,6 +36,7 @@ export function Header() {
         gap={2}
         textDecoration="none"
         marginRight={8}
+        _hover={{ colorPalette: 'purple' }}
       >
         <NextLink href="/">
           <Heading as="h1" size="5xl">

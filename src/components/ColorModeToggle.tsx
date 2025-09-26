@@ -13,7 +13,7 @@ export function ColorModeToggle() {
     <IconButton
       aria-label="toggle color mode"
       onClick={toggleColorMode}
-      backgroundColor={theme === 'light' ? 'cyan.fg' : 'yellow.fg'}
+      backgroundColor={theme === 'light' ? 'teal.fg' : 'purple.fg'}
     >
       {theme === 'light' ? <LuMoon /> : <LuSun />}
     </IconButton>
