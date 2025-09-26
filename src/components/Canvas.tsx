@@ -1,11 +1,13 @@
+'use client'
+
 import { Box } from '@chakra-ui/react'
-import React, { useMemo, useEffect, useRef } from 'react'
-// @ts-ignore
-import { context, program, attribute, uniform } from 'gl-util'
+// @ts-expect-error
+import { attribute, context, program, uniform } from 'gl-util'
+import { useEffect, useRef } from 'react'
 
 export interface CanvasProps {}
 
-export function Canvas(props: CanvasProps) {
+export function Canvas(_props: CanvasProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const glRef = useRef<any>(null)
   const progRef = useRef<any>(null)
@@ -16,9 +18,11 @@ export function Canvas(props: CanvasProps) {
 
     const gl = context({
       canvas: canvasEl,
-      attributes: {}
+      attributes: {},
     })
-    const prog = program(gl, `
+    const prog = program(
+      gl,
+      `
       precision highp float;
 
       attribute vec2 position;
@@ -26,7 +30,8 @@ export function Canvas(props: CanvasProps) {
       void main() {
         gl_Position = vec4(position, 0, 1);
       }
-    `, `
+    `,
+      `
       precision highp float;
 
       ${noise2dShader}
@@ -54,41 +59,20 @@ export function Canvas(props: CanvasProps) {
 
         gl_FragColor = vec4(rgb, 1.0);
       }
-    `)
+    `,
+    )
     attribute(
       gl,
       'position',
-      [
-        -1.0, -1.0,
-        1.0, -1.0,
-        -1.0, 1.0,
-        -1.0, 1.0,
-        1.0, -1.0,
-        1.0, 1.0,
-      ],
-      prog
-    )
-    uniform(
+      [-1.0, -1.0, 1.0, -1.0, -1.0, 1.0, -1.0, 1.0, 1.0, -1.0, 1.0, 1.0],
       prog,
-      'u_resolution',
-      [1.0, 1.0],
     )
-    uniform(
-      prog,
-      'u_time',
-      {
-        data: 0.0,
-        type: gl.FLOAT,
-      },
-    )
-    uniform(
-      prog,
-      'u_seed',
-      [
-        1000.0 * Math.random(),
-        1000.0 * Math.random(),
-      ],
-    )
+    uniform(prog, 'u_resolution', [1.0, 1.0])
+    uniform(prog, 'u_time', {
+      data: 0.0,
+      type: gl.FLOAT,
+    })
+    uniform(prog, 'u_seed', [1000.0 * Math.random(), 1000.0 * Math.random()])
 
     glRef.current = gl
     progRef.current = prog
@@ -100,7 +84,6 @@ export function Canvas(props: CanvasProps) {
     if (gl == null) return
 
     updateSize()
-
     window.addEventListener('resize', updateSize)
     return () => {
       window.removeEventListener('resize', updateSize)
@@ -132,15 +115,11 @@ export function Canvas(props: CanvasProps) {
       canvasEl.width = displayWidth
       canvasEl.height = displayHeight
 
-      gl.viewport(0, 0, displayWidth, displayHeight);
+      gl.viewport(0, 0, displayWidth, displayHeight)
 
       const resolution = [displayWidth, displayHeight]
 
-      uniform(
-        prog,
-        'u_resolution',
-        resolution,
-      )
+      uniform(prog, 'u_resolution', resolution)
     }
   }, [])
 
@@ -149,54 +128,47 @@ export function Canvas(props: CanvasProps) {
     const prog = progRef.current
     if (gl == null) return
 
-    uniform(
-      prog,
-      'u_time',
-      {
-        data: timeElapsed,
-        type: gl.FLOAT,
-      }
-    )
+    uniform(prog, 'u_time', {
+      data: timeElapsed,
+      type: gl.FLOAT,
+    })
 
     gl.drawArrays(gl.TRIANGLES, 0, 6)
   })
 
   return (
-    <canvas
+    <Box
+      as="canvas"
       ref={canvasRef}
-      aria-label='Dynamic rainbow background created from classic perlin noise.'
+      aria-label="Dynamic rainbow background created from classic perlin noise."
       style={{
-        display: 'none'
+        display: 'none',
+      }}
+      filter={{
+        _dark: 'brightness(0.5)',
       }}
     />
   )
 }
 
+export function useRaf(callback: (timeElapsed: DOMHighResTimeStamp) => void): void {
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const cb = callback
 
-export function useRaf(
-  callback: (timeElapsed: DOMHighResTimeStamp) => void,
-): void {
   useEffect(() => {
     const raf = window.requestAnimationFrame
-
     let isActive = true
-    
     raf(loop)
-
     return () => {
       isActive = false
     }
-
     function loop(time: DOMHighResTimeStamp) {
       if (!isActive) return
-
-      callback(time)
-
+      cb(time)
       raf(loop)
     }
-  }, [callback])
+  }, [cb])
 }
-
 
 // https://github.com/patriciogonzalezvivo/lygia/blob/main/generative/cnoise.glsl
 const noise2dShader = `
@@ -242,7 +214,7 @@ vec4 permute(const in vec4 x) {
 
 /*
 original_author: [Ian McEwan, Ashima Arts]
-description: 
+description:
 use: taylorInvSqrt(<float|vec4> x)
 */
 
@@ -371,4 +343,3 @@ vec3 hsl2rgb(float h, float s, float l) {
     return hsl2rgb(vec3(h, s, l));
 }
 `
-

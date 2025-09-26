@@ -5,7 +5,11 @@ A simple personal website at [mikey.nz](https://mikey.nz)
 ## Dev
 
 ```bash
-npm run dev
+pnpm install
+```
+
+```bash
+pnpm run dev
 ```
 
 ## License
