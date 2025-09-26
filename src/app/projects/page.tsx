@@ -1,7 +1,14 @@
-import { Container, Heading } from '@chakra-ui/react'
+import { Box, Container, Heading, List } from '@chakra-ui/react'
 import { useId } from 'react'
-import ProjectsTimeline from '@/components/ProjectsTimeline'
-import { getProjects } from '@/util/projects'
+import Markdown, { MarkdownAsync } from 'react-markdown'
+import { defaultComponents } from '@/components/Markdown'
+import {
+  getProjects,
+  type ProjectBody as ProjectBodyType,
+  type ProjectMeta as ProjectMetaType,
+  type Projects as ProjectsType,
+  type Project as ProjectType,
+} from '@/util/projects'
 
 export default async function Page() {
   const headingId = useId()
@@ -23,24 +30,10 @@ export default async function Page() {
         My projects
       </Heading>
 
-      <ProjectsTimeline projects={projects} />
+      <Projects projects={projects} />
     </Container>
   )
 }
-
-/*
-import { Box, Container, Heading, List } from '@chakra-ui/react'
-import { useId } from 'react'
-import Markdown, { MarkdownAsync } from 'react-markdown'
-import { defaultComponents } from '@/components/Markdown'
-import ProjectsTimeline from '@/components/ProjectsTimeline'
-import {
-  getProjects,
-  type ProjectBody as ProjectBodyType,
-  type ProjectMeta as ProjectMetaType,
-  type Projects as ProjectsType,
-  type Project as ProjectType,
-} from '@/util/projects'
 
 type ProjectsProps = {
   projects: ProjectsType
@@ -101,4 +94,3 @@ function ProjectBody(props: ProjectBodyProps) {
     </Box>
   )
 }
-*/
