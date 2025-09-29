@@ -14,38 +14,51 @@
 
 import { Box } from '@chakra-ui/react'
 import {
-  differenceInMilliseconds,
   differenceInSeconds,
   eachMonthOfInterval,
   endOfMonth,
   format as formatDate,
-  getTime,
   startOfMonth,
 } from 'date-fns'
-import { keyBy, minBy } from 'es-toolkit'
+import { minBy } from 'es-toolkit'
 import type { Project, Projects } from '@/util/projects'
 
 export type ProjectsTimelineProps = {
   projects: Projects
 }
 
-type ProjectsById = Record<string, Project>
+const distancePerDay = '2px'
+const distancePerSecond = `(${distancePerDay} / 86400)`
+
+const NOW = new Date(Date.now())
 
 export function ProjectsTimeline(props: ProjectsTimelineProps) {
   const { projects } = props
 
-  const earliestStart = getEarliestStart(projects)
-  const now = new Date(Date.now())
+  const start = getEarliestStart(projects)
+  const end = NOW
 
-  const laneIndexByProjectId = packProjectsToLanes(projects)
-  const projectsById = keyBy(projects, (project) => project.id)
+  const startMonth = startOfMonth(start)
+  const endMonth = endOfMonth(end)
+  const totalSeconds = differenceInSeconds(endMonth, startMonth)
+
+  const { laneIndexByProjectId, maxLanes } = packProjectsToLanes(projects)
 
   return (
-    <Box display="flex" flexDirection="row">
-      <TimeMarkers start={earliestStart} end={now} />
-      {
-        //<ProjectMarkers laneIndexByProjectId={laneIndexByProjectId} projectsById={projectsById} />
-      }
+    <Box
+      display="flex"
+      flexDirection="row"
+      width="full"
+      maxWidth="xl"
+      height={`calc(${totalSeconds} * ${distancePerSecond})`}
+    >
+      <TimeMarkers start={start} end={end} endMonth={endMonth} />
+      <ProjectMarkers
+        projects={projects}
+        laneIndexByProjectId={laneIndexByProjectId}
+        maxLanes={maxLanes}
+        endMonth={endMonth}
+      />
     </Box>
   )
 }
@@ -53,80 +66,132 @@ export function ProjectsTimeline(props: ProjectsTimelineProps) {
 export type TimeMarkersProps = {
   start: Date
   end: Date
+  endMonth: Date
 }
 
 export function TimeMarkers(props: TimeMarkersProps) {
-  const { start, end } = props
+  const { start, end, endMonth } = props
 
-  const distancePerDay = '2px'
-  const distancePerSecond = `(${distancePerDay} / 86400)`
+  return (
+    <Box
+      position="relative"
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-end"
+      textAlign="right"
+      width="8rem"
+    >
+      <Box position="absolute" top={0} width="full" borderTop="md" />
 
-  const startMonth = startOfMonth(start)
-  const endMonth = endOfMonth(end)
+      {eachMonthOfInterval({ start, end })
+        .reverse()
+        .map((monthStart) => {
+          const monthId = monthStart.getTime()
+          const monthEnd = endOfMonth(monthStart)
+          const monthLabel = formatDate(monthStart, 'MMMM yyyy')
+
+          const top = `calc(${distancePerSecond} * ${differenceInSeconds(endMonth, monthEnd)})`
+          const height = `calc(${distancePerSecond} * ${differenceInSeconds(monthEnd, monthStart)})`
+
+          return (
+            <Box
+              key={monthId}
+              position="absolute"
+              display="flex"
+              alignItems="center"
+              top={top}
+              height={height}
+              aria-label={monthLabel}
+              borderBottom="md"
+              width="full"
+            >
+              {monthLabel}
+            </Box>
+          )
+        })}
+    </Box>
+  )
+}
+
+export type ProjectMarkersProps = {
+  projects: Projects
+  laneIndexByProjectId: LaneIndexByProjectId
+  endMonth: Date
+}
+
+const laneWidth = '2rem'
+const laneMargin = '2rem'
+
+export function ProjectMarkers(props: ProjectMarkersProps) {
+  const { projects, laneIndexByProjectId, endMonth } = props
 
   return (
     <Box position="relative" display="flex" flexDirection="column" alignItems="flex-end">
-      {eachMonthOfInterval({ start, end }).map((month) => {
-        const monthId = month.getTime()
-        const secondsFromEnd = differenceInSeconds(endMonth, month)
+      {projects.map((project) => {
+        const laneIndex = laneIndexByProjectId[project.meta.id]
+
+        const secondsFromEnd = differenceInSeconds(endMonth, project.meta.end ?? NOW)
+        const secondsLong = differenceInSeconds(project.meta.end ?? NOW, project.meta.start)
+
         return (
           <Box
-            key={monthId}
+            key={project.meta.id}
+            backgroundColor={project.meta.color}
             position="absolute"
             top={`calc(${distancePerSecond} * ${secondsFromEnd})`}
-          >
-            {formatDate(month, 'MMMM yyyy')}
-          </Box>
+            height={`calc(${distancePerSecond} * ${secondsLong})`}
+            width={`calc(${laneWidth})`}
+            left={`calc(${laneIndex} * ${laneWidth} + ${laneMargin} * ${laneIndex + 1})`}
+          />
         )
       })}
     </Box>
   )
 }
 
-export type ProjectMarkersProps = {}
-
-export function ProjectMarkersProps(props: ProjectMarkersProps) {}
-
 /* helper functions */
 
 function getEarliestStart(projects: Projects): Date {
-  const earliestStartProject = minBy(projects, (project) => getTime(project.meta.start))
-  if (earliestStartProject == null) return new Date(Date.now())
+  const earliestStartProject = minBy(projects, (project) => project.meta.start.getTime())
+  if (earliestStartProject == null) return NOW
   return earliestStartProject.meta.start
 }
 
 type CurrentLanes = Record<number, Project> // [index] -> [project]
 type LaneIndexByProjectId = Record<string, number>
 
-function packProjectsToLanes(projects: Projects): LaneIndexByProjectId {
+function packProjectsToLanes(projects: Projects): {
+  laneIndexByProjectId: LaneIndexByProjectId
+  maxLanes: number
+} {
   const currentLanes: CurrentLanes = {}
   const laneIndexByProjectId: LaneIndexByProjectId = {}
+  let maxLanes = 0
 
-  // Sort by earliest start first
-  const sortedProjects = projects.sort((a, b) => {
+  // Sort by latest end first
+  const projectsOrderedByLatestFirst = projects.sort((a, b) => {
     // `(a, b) => a - b` sorts numbers in ascending order.
-    return differenceInMilliseconds(b.meta.start, a.meta.start)
+    const aTime = (a.meta.end ?? NOW).getTime()
+    const bTime = (b.meta.end ?? NOW).getTime()
+    return bTime - aTime
   })
 
-  sortedProjects.forEach((project) => {
-    const {
-      meta: { id },
-    } = project
-
+  projectsOrderedByLatestFirst.forEach((project) => {
     const nextLaneIndex = getNextAvailableLaneIndex(currentLanes, project)
     currentLanes[nextLaneIndex] = project
     laneIndexByProjectId[project.meta.id] = nextLaneIndex
+    if (nextLaneIndex > maxLanes) maxLanes = nextLaneIndex
   })
 
-  return laneIndexByProjectId
+  return { laneIndexByProjectId, maxLanes }
 }
 
 // For next project, find available slot
 // - A slot is empty is undefined or null
-// - A slot is available if the current project ends before the next project starts
+// - A slot is available if the current project starts after the next project ends
 function getNextAvailableLaneIndex(currentLanes: CurrentLanes, nextProject: Project): number {
   for (let index = 0; ; index++) {
     if (currentLanes[index] == null) return index
-    if (currentLanes[index].meta.end < nextProject.meta.start) return index
+    if (currentLanes[index].meta.start > (nextProject.meta.end ?? NOW)) return index
   }
 }

@@ -1,5 +1,7 @@
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
+// @ts-expect-error
+import randomColor from 'randomcolor'
 import { parse as parseYaml } from 'yaml'
 
 /*
@@ -29,7 +31,8 @@ Another project?
 export type ProjectMeta = {
   id: string
   start: Date
-  end: Date
+  end: Date | null
+  color: string
 }
 
 export type ProjectBody = string
@@ -187,6 +190,7 @@ export function parseProjects(data: string): Projects {
     const id = makeId(obj.id, 'id')
     const start = makeDate(obj.start, 'start')
     const end = makeDate(obj.end, 'end')
+    const color = obj.color ?? randomColor()
 
     if (start.getTime() > end.getTime()) {
       throw new Error(
@@ -203,7 +207,7 @@ export function parseProjects(data: string): Projects {
     const body = lines.slice(bodyStart, nextStart).join('\n')
 
     projects.push({
-      meta: { id, start, end },
+      meta: { id, start, end, color },
       body,
     })
 
