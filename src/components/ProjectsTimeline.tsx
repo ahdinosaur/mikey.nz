@@ -1,17 +1,3 @@
-// TODO
-//
-// - Need to compute earliest start of project
-// - Algorithm to pack projects:
-//   - First sort projects by start date
-//   - For next project, find available slot
-//     - A slot is available if the current project ends before the next project starts
-//     - A slot is empty is undefined or null
-//  - Placements
-//    - Container is position="relative"
-//    - Is it possible to place using position="absolute" and have a top value?
-//    - Make-up a distance per day, based on base font-size.
-//  - Should we pre-compute this data in a server component?
-
 import { Box } from '@chakra-ui/react'
 import {
   differenceInSeconds,
@@ -23,8 +9,11 @@ import {
 import { minBy } from 'es-toolkit'
 import type { Project, Projects } from '@/util/projects'
 
+export type NavigateToProject = (projectId: string) => void
+
 export type ProjectsTimelineProps = {
   projects: Projects
+  navigateToProject: NavigateToProject
 }
 
 const distancePerDay = '2px'
@@ -33,7 +22,7 @@ const distancePerSecond = `(${distancePerDay} / 86400)`
 const NOW = new Date(Date.now())
 
 export function ProjectsTimeline(props: ProjectsTimelineProps) {
-  const { projects } = props
+  const { projects, navigateToProject } = props
 
   const start = getEarliestStart(projects)
   const end = NOW
@@ -49,11 +38,11 @@ export function ProjectsTimeline(props: ProjectsTimelineProps) {
       display="flex"
       flexDirection="row"
       width="full"
-      maxWidth="xl"
       height={`calc(${totalSeconds} * ${distancePerSecond})`}
     >
       <TimeMarkers start={start} end={end} endMonth={endMonth} />
       <ProjectMarkers
+        navigateToProject={navigateToProject}
         projects={projects}
         laneIndexByProjectId={laneIndexByProjectId}
         maxLanes={maxLanes}
@@ -115,7 +104,9 @@ export function TimeMarkers(props: TimeMarkersProps) {
 
 export type ProjectMarkersProps = {
   projects: Projects
+  navigateToProject: NavigateToProject
   laneIndexByProjectId: LaneIndexByProjectId
+  maxLanes: number
   endMonth: Date
 }
 
@@ -123,10 +114,16 @@ const laneWidth = '2rem'
 const laneMargin = '2rem'
 
 export function ProjectMarkers(props: ProjectMarkersProps) {
-  const { projects, laneIndexByProjectId, endMonth } = props
+  const { projects, navigateToProject, laneIndexByProjectId, maxLanes, endMonth } = props
 
   return (
-    <Box position="relative" display="flex" flexDirection="column" alignItems="flex-end">
+    <Box
+      position="relative"
+      display="flex"
+      flexDirection="column"
+      alignItems="flex-end"
+      width={`calc(${laneWidth} * ${maxLanes} + ${laneMargin} * ${maxLanes + 1})`}
+    >
       {projects.map((project) => {
         const laneIndex = laneIndexByProjectId[project.meta.id]
 
@@ -142,6 +139,8 @@ export function ProjectMarkers(props: ProjectMarkersProps) {
             height={`calc(${distancePerSecond} * ${secondsLong})`}
             width={`calc(${laneWidth})`}
             left={`calc(${laneIndex} * ${laneWidth} + ${laneMargin} * ${laneIndex + 1})`}
+            borderRadius="xl"
+            onClick={(_ev) => navigateToProject(project.meta.id)}
           />
         )
       })}
@@ -180,7 +179,9 @@ function packProjectsToLanes(projects: Projects): {
     const nextLaneIndex = getNextAvailableLaneIndex(currentLanes, project)
     currentLanes[nextLaneIndex] = project
     laneIndexByProjectId[project.meta.id] = nextLaneIndex
-    if (nextLaneIndex > maxLanes) maxLanes = nextLaneIndex
+
+    const numLanes = nextLaneIndex + 1
+    if (numLanes > maxLanes) maxLanes = numLanes
   })
 
   return { laneIndexByProjectId, maxLanes }
