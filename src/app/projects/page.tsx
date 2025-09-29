@@ -2,6 +2,7 @@ import { Box, Container, Heading, List } from '@chakra-ui/react'
 import { useId } from 'react'
 import Markdown, { MarkdownAsync } from 'react-markdown'
 import { defaultComponents } from '@/components/Markdown'
+import { ProjectsTimeline } from '@/components/ProjectsTimeline'
 import {
   getProjects,
   type ProjectBody as ProjectBodyType,
@@ -30,7 +31,7 @@ export default async function Page() {
         My projects
       </Heading>
 
-      <Projects projects={projects} />
+      <ProjectsTimeline projects={projects} />
     </Container>
   )
 }
