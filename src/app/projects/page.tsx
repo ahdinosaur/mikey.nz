@@ -16,11 +16,6 @@ export default async function Page() {
 
   const projects = await getProjects()
 
-  const navigateToProject = useCallback((projectId) => {
-
-
-  }, [])
-
   return (
     <Container
       as="main"
@@ -37,20 +32,5 @@ export default async function Page() {
 
       <ProjectsTimeline projects={projects} />
     </Container>
-  )
-}
-
-type ProjectsProps = {
-  projects: ProjectsType
-}
-
-function Projects(props: ProjectsProps) {
-  const { projects } = props
-  return (
-    <List.Root>
-      {projects.map((project) => (
-        <Project key={project.meta.id} project={project} />
-      ))}
-    </List.Root>
   )
 }

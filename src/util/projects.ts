@@ -33,6 +33,7 @@ export type ProjectMeta = {
   start: Date
   end: Date | null
   color: string
+  icon: string | null
 }
 
 export type ProjectBody = string
@@ -191,6 +192,7 @@ export function parseProjects(data: string): Projects {
     const start = makeDate(obj.start, 'start')
     const end = makeDate(obj.end, 'end')
     const color = obj.color ?? randomColor()
+    const icon = (obj.icon ?? null) as string | null
 
     if (start.getTime() > end.getTime()) {
       throw new Error(
@@ -207,7 +209,7 @@ export function parseProjects(data: string): Projects {
     const body = lines.slice(bodyStart, nextStart).join('\n')
 
     projects.push({
-      meta: { id, start, end, color },
+      meta: { id, start, end, color, icon },
       body,
     })
 

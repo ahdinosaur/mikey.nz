@@ -1,4 +1,4 @@
-import { Box } from '@chakra-ui/react'
+import { Box, Icon } from '@chakra-ui/react'
 import {
   differenceInSeconds,
   eachMonthOfInterval,
@@ -7,13 +7,12 @@ import {
   startOfMonth,
 } from 'date-fns'
 import { minBy } from 'es-toolkit'
+import Link from 'next/link'
 import type { Project, Projects } from '@/util/projects'
-
-export type NavigateToProject = (projectId: string) => void
+import { DynamicIcon } from './DynamicIcon'
 
 export type ProjectsTimelineProps = {
   projects: Projects
-  navigateToProject: NavigateToProject
 }
 
 const distancePerDay = '2px'
@@ -22,7 +21,7 @@ const distancePerSecond = `(${distancePerDay} / 86400)`
 const NOW = new Date(Date.now())
 
 export function ProjectsTimeline(props: ProjectsTimelineProps) {
-  const { projects, navigateToProject } = props
+  const { projects } = props
 
   const start = getEarliestStart(projects)
   const end = NOW
@@ -37,12 +36,11 @@ export function ProjectsTimeline(props: ProjectsTimelineProps) {
     <Box
       display="flex"
       flexDirection="row"
-      width="full"
+      justifyContent="center"
       height={`calc(${totalSeconds} * ${distancePerSecond})`}
     >
       <TimeMarkers start={start} end={end} endMonth={endMonth} />
       <ProjectMarkers
-        navigateToProject={navigateToProject}
         projects={projects}
         laneIndexByProjectId={laneIndexByProjectId}
         maxLanes={maxLanes}
@@ -104,7 +102,6 @@ export function TimeMarkers(props: TimeMarkersProps) {
 
 export type ProjectMarkersProps = {
   projects: Projects
-  navigateToProject: NavigateToProject
   laneIndexByProjectId: LaneIndexByProjectId
   maxLanes: number
   endMonth: Date
@@ -114,7 +111,7 @@ const laneWidth = '2rem'
 const laneMargin = '2rem'
 
 export function ProjectMarkers(props: ProjectMarkersProps) {
-  const { projects, navigateToProject, laneIndexByProjectId, maxLanes, endMonth } = props
+  const { projects, laneIndexByProjectId, maxLanes, endMonth } = props
 
   return (
     <Box
@@ -125,23 +122,37 @@ export function ProjectMarkers(props: ProjectMarkersProps) {
       width={`calc(${laneWidth} * ${maxLanes} + ${laneMargin} * ${maxLanes + 1})`}
     >
       {projects.map((project) => {
-        const laneIndex = laneIndexByProjectId[project.meta.id]
+        const { id, start, end, color, icon } = project.meta
 
-        const secondsFromEnd = differenceInSeconds(endMonth, project.meta.end ?? NOW)
-        const secondsLong = differenceInSeconds(project.meta.end ?? NOW, project.meta.start)
+        const laneIndex = laneIndexByProjectId[id]
+
+        const secondsFromEnd = differenceInSeconds(endMonth, end ?? NOW)
+        const secondsLong = differenceInSeconds(end ?? NOW, start)
 
         return (
           <Box
-            key={project.meta.id}
-            backgroundColor={project.meta.color}
+            asChild
+            key={id}
+            backgroundColor={color}
             position="absolute"
             top={`calc(${distancePerSecond} * ${secondsFromEnd})`}
             height={`calc(${distancePerSecond} * ${secondsLong})`}
             width={`calc(${laneWidth})`}
             left={`calc(${laneIndex} * ${laneWidth} + ${laneMargin} * ${laneIndex + 1})`}
+            display="flex"
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="center"
             borderRadius="xl"
-            onClick={(_ev) => navigateToProject(project.meta.id)}
-          />
+          >
+            <Link href={`/projects/${id}`}>
+              {icon != null && (
+                <Icon position="sticky" marginTop={4} top={4}>
+                  <DynamicIcon icon={icon} />
+                </Icon>
+              )}
+            </Link>
+          </Box>
         )
       })}
     </Box>
