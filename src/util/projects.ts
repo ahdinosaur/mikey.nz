@@ -3,6 +3,7 @@ import { join } from 'node:path'
 // @ts-expect-error
 import randomColor from 'randomcolor'
 import { parse as parseYaml } from 'yaml'
+import { z } from 'zod'
 
 /*
 
@@ -69,6 +70,35 @@ export type Project = {
 
 export type Projects = Array<Project>
 
+const ProjectMetaSchema = z
+  .object({
+    id: z.string().min(1, 'id must be a non-empty string'),
+    start: z.preprocess(
+      (v) => (typeof v === 'string' || v instanceof Date ? new Date(v) : v),
+      z.date({ error: 'start date is required' }),
+    ),
+    end: z
+      .union([
+        z.preprocess(
+          (v) =>
+            v === undefined || v === null
+              ? null
+              : typeof v === 'string' || v instanceof Date
+                ? new Date(v)
+                : v,
+          z.date(),
+        ),
+        z.null(),
+      ])
+      .default(null),
+    color: z.string().default(() => randomColor()),
+    icon: z.string().nullable().default(null),
+  })
+  .refine((data) => data.end === null || data.start <= data.end, {
+    path: ['end'],
+    message: `'end' must be on or after 'start' date.`,
+  })
+
 export async function getProjects(): Promise<Projects> {
   const cwd = process.cwd()
   const projectsDataPath = join(cwd, 'src/projects.md')
@@ -76,7 +106,7 @@ export async function getProjects(): Promise<Projects> {
   return parseProjects(projectsData)
 }
 
-export function parseProjects(data: string): Projects {
+function parseProjects(data: string): Projects {
   const text = data.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n')
   const lines = text.split('\n')
   const len = lines.length
@@ -86,16 +116,15 @@ export function parseProjects(data: string): Projects {
   const isDelim = (line: string) => line.trim() === '---'
   const isBlank = (line: string) => /^\s*$/.test(line)
 
-  const skipBlank = (start: number) => {
-    let i = start
+  const skipBlank = (i: number) => {
     while (i < len && isBlank(lines[i])) i++
     return i
   }
 
+  // Handles skipping code fences properly
   const findNextDelim = (start: number) => {
     let fenceChar: '`' | '~' | null = null
     let fenceLen = 0
-
     for (let i = start; i < len; i++) {
       const line = lines[i]
       const m = line.match(/^\s*([`~]{3,})/)
@@ -122,18 +151,16 @@ export function parseProjects(data: string): Projects {
     if (pos >= len) break
 
     if (!isDelim(lines[pos])) {
-      const found = lines[pos] || '(empty line)'
       throw new Error(
-        `Expected '---' to start project frontmatter at line ${pos + 1}, ` +
-          `but found: ${found}. Each project must begin with a YAML ` +
-          `frontmatter block delimited by '---'.`,
+        `Expected '---' to start project frontmatter at line ${pos + 1}, but found: ${
+          lines[pos] || '(empty line)'
+        }.`,
       )
     }
 
     const fmStart = pos
-
-    // Find closing '---' for the frontmatter.
     let fmEnd = -1
+
     for (let i = fmStart + 1; i < len; i++) {
       if (isDelim(lines[i])) {
         fmEnd = i
@@ -141,10 +168,7 @@ export function parseProjects(data: string): Projects {
       }
     }
     if (fmEnd === -1) {
-      throw new Error(
-        `Unclosed frontmatter starting at line ${fmStart + 1}. ` +
-          `Add a matching '---' to close the YAML block.`,
-      )
+      throw new Error(`Unclosed frontmatter starting at line ${fmStart + 1}. Add a matching '---'.`)
     }
 
     const yamlText = lines
@@ -153,95 +177,33 @@ export function parseProjects(data: string): Projects {
       .trim()
     if (!yamlText) {
       throw new Error(
-        `Empty frontmatter at lines ${fmStart + 1}-${fmEnd + 1}. ` +
-          `Provide at least 'start' and 'end' fields.`,
+        `Empty frontmatter at lines ${fmStart + 1}-${fmEnd + 1}. Expected at least 'id' and 'start'.`,
       )
     }
 
-    let raw: unknown
+    let parsedYaml: unknown
     try {
-      raw = parseYaml(yamlText)
+      parsedYaml = parseYaml(yamlText)
     } catch (e: any) {
-      const message = e?.message || String(e)
-      throw new Error(
-        `Invalid YAML in frontmatter starting at line ${fmStart + 1}.\n` +
-          `${message}\n` +
-          `If this '---' was meant as a horizontal rule, indent it by a ` +
-          `space or use '***' instead.`,
-      )
+      throw new Error(`Invalid YAML at lines ${fmStart + 1}-${fmEnd + 1}.\n${e?.message || e}`)
     }
 
-    if (typeof raw !== 'object' || raw === null) {
-      throw new Error(`Frontmatter at lines ${fmStart + 1}-${fmEnd + 1} must be a YAML mapping.`)
-    }
+    // ✅ Validate with schema
+    const meta = ProjectMetaSchema.parse(parsedYaml)
 
-    const makeId = (value: unknown, field: 'id'): string => {
-      if (typeof value !== 'string') {
-        throw new Error(
-          `Invalid '${field}' in frontmatter at lines ` +
-            `${fmStart + 1}-${fmEnd + 1}. ` +
-            `Expected a valid string`,
-        )
-      }
-      return value
-    }
-
-    const makeDate = (value: unknown, field: 'start' | 'end'): Date => {
-      let d: Date | null = null
-      if (value instanceof Date) {
-        d = value
-      } else if (typeof value === 'string' || typeof value === 'number') {
-        d = new Date(value as any)
-      }
-      if (!d || Number.isNaN(d.getTime())) {
-        throw new Error(
-          `Invalid '${field}' in frontmatter at lines ` +
-            `${fmStart + 1}-${fmEnd + 1}. ` +
-            `Expected a valid date string (e.g. 2020-01-31).`,
-        )
-      }
-      return d
-    }
-
-    const obj = raw as Record<string, unknown>
-
-    if (!('id' in obj && 'start' in obj && 'end' in obj)) {
-      throw new Error(
-        `Missing required 'id', 'start', and 'end' in frontmatter at lines ` +
-          `${fmStart + 1}-${fmEnd + 1}.`,
-      )
-    }
-
-    const id = makeId(obj.id, 'id')
-    const start = makeDate(obj.start, 'start')
-    const end = makeDate(obj.end, 'end')
-    const color = obj.color ?? randomColor()
-    const icon = (obj.icon ?? null) as string | null
-
-    if (start.getTime() > end.getTime()) {
-      throw new Error(
-        `In frontmatter at lines ${fmStart + 1}-${fmEnd + 1}: 'start' ` +
-          `must be on or before 'end'.`,
-      )
-    }
-
-    // Body is everything until the next non-fenced '---' or EOF.
+    // Body → everything until next frontmatter or EOF
     const bodyStart = fmEnd + 1
     let nextStart = findNextDelim(bodyStart)
     if (nextStart === -1) nextStart = len
 
-    const body = lines.slice(bodyStart, nextStart).join('\n')
+    const body = lines.slice(bodyStart, nextStart).join('\n').trim()
 
-    projects.push({
-      meta: { id, start, end, color, icon },
-      body,
-    })
-
-    pos = nextStart // continue parsing from the next '---'
+    projects.push({ meta, body })
+    pos = nextStart
   }
 
   if (projects.length === 0) {
-    throw new Error(`No projects found. Expected at least one '---' YAML frontmatter block.`)
+    throw new Error(`No projects found. Provide at least one '---' YAML block.`)
   }
 
   return projects
