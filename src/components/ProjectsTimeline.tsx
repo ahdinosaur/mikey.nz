@@ -9,6 +9,7 @@ import {
 import { minBy } from 'es-toolkit'
 import Link from 'next/link'
 import type { Project, Projects } from '@/util/projects'
+import { randomColor } from '@/util/randomColor'
 import { DynamicIcon } from './DynamicIcon'
 
 export type ProjectsTimelineProps = {
@@ -133,7 +134,7 @@ export function ProjectMarkers(props: ProjectMarkersProps) {
           <Box
             asChild
             key={id}
-            backgroundColor={color}
+            backgroundColor={color ?? randomColor(id)}
             position="absolute"
             top={`calc(${distancePerSecond} * ${secondsFromEnd})`}
             height={`calc(${distancePerSecond} * ${secondsLong})`}

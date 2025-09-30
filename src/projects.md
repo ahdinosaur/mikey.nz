@@ -1,4 +1,69 @@
 ---
+id: todo
+label: TODO
+icon: fa/FaFileExcel
+start: 2012-09-01
+end: 2014-06-01
+---
+
+TODO:
+
+- 2012
+  - https://github.com/ahdinosaur/hive-library ???
+  - https://github.com/ahdinosaur/audiobot
+  - skel
+- 2013
+  - holon project
+    - holon blog post
+  - holonomy???
+  - web-imu: https://github.com/ahdinosaur/web-imu
+  - brightlights: https://github.com/ahdinosaur/brightlights
+  - workshift: https://github.com/ahdinosaur/workshift
+  - git-rap: https://github.com/ahdinosaur/git-rap
+    - sexy-script: https://github.com/ahdinosaur/sexy-script
+  - holoverse: https://github.com/ahdinosaur/holoverse
+-
+
+
+---
+id: save-cloyne
+label: Save Cloyne
+icon: fa/FaFileExcel
+start: 2012-09-01
+end: 2014-06-01
+tags:
+- cloyne
+---
+
+At the end of my life in [Cloyne Court Hotel and Casino](https://en.wikipedia.org/wiki/Cloyne_Court_Hotel), a house of 150 people living under one roof (with one kitchen, one dining room, many many bedrooms, etc), Cloyne became under threat from the Berkeley Student Cooperative, who wanted to make an example of the house for something that occurred many years ago (before anyone living in the house was present).
+
+I used my web development skills to fight back: [savecloyne.come](https://web.archive.org/web/20150712230038/http://savecloyne.com/)
+
+From that time, this video still gives me goosebumps: ["Our Port In Any Storm"](https://vimeo.com/showcase/2783829?video=88628686)
+
+See also: [Cloyne Network Manager](/projects/cloyne-network-manager)
+
+---
+id: cloyne-network-manager
+label: Cloyne Network Manager
+icon: fa/FaFileExcel
+start: 2012-09-01
+end: 2014-06-01
+tags:
+- cloyne
+- networking
+---
+
+For 2 years while I lived at [Cloyne Court Hotel and Casino](https://en.wikipedia.org/wiki/Cloyne_Court_Hotel), a house of 150 people living under one roof (with one kitchen, one dining room, many many bedrooms, etc), I was the "Network Manager" in charge of making sure everyone had sufficient internet.
+
+Some artifacts:
+
+- [`ahdinosaur/howtonetwork`](https://github.com/ahdinosaur/howtonetwork)
+- [`ahdinosaur/sketchy-ftp`](https://github.com/ahdinosaur-deprecated/sketchy-ftp)
+
+See also: [savecloyne.com](/projects/save-cloyne)
+
+---
 id: multimedia-orchestra-berkeley
 label: Multimedia Orchestra @Berkeley
 icon: fa/FaFileExcel
@@ -45,8 +110,8 @@ You can also see my software artifacts: [`ahdinosaur/prusa-mendel`](https://gith
 id: dotengine
 label: dotengine (CfEngine3 + Gentoo)
 icon: ai/AiFillAndroid
-start: 2025-05-17
-end: 2025-08-23
+start: 2012-12-16
+end: 2013-02-03
 tags:
 - os-config
 ---
@@ -82,6 +147,10 @@ You could see at the time I was using:
 - irssi for IRC
 - mutt for email
 
+Then I experimented with the concept of "bricks":
+
+-
+
 I then transitioned to [`ahdinosaur/dot`](https://github.com/ahdinosaur/dot) using Arch Linux.
 
 Was superseded by [dotengine](/projects/dotengine) using CfEngine3 on Gentoo.
@@ -91,7 +160,7 @@ id: hackercoop
 label: The Hacker Cooperative
 icon: di/DiBootstrap
 start: 2012-01-10
-end: 2012-03-09
+end: 2014-01-21
 tags:
 - p2p
 - peer-production
@@ -108,4 +177,9 @@ we need to make the business plan for it.
 
 This was the first in my "Omega" project towards [peer production](TODO).
 
-This overlaps with me [building a RepRap Prusa Mendel 3d printer](/projects/reprap-prusa-mendel).
+Artifacts:
+
+- https://github.com/hackercoop
+- https://github.com/ahdinosaur/hackercoop-bricks
+
+This later overlaps with me [building a RepRap Prusa Mendel 3d printer](/projects/reprap-prusa-mendel).

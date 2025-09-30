@@ -1,7 +1,5 @@
 import { promises as fs } from 'node:fs'
 import { join } from 'node:path'
-// @ts-expect-error
-import randomColor from 'randomcolor'
 import { parse as parseYaml } from 'yaml'
 import { z } from 'zod'
 
@@ -91,7 +89,7 @@ const ProjectMetaSchema = z
         z.null(),
       ])
       .default(null),
-    color: z.string().default(() => randomColor()),
+    color: z.string().nullable().default(null),
     icon: z.string().nullable().default(null),
   })
   .refine((data) => data.end === null || data.start <= data.end, {
